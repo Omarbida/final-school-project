@@ -121,7 +121,7 @@ const ControlIcons = ({
             container={containerRef.current}
           >
             <Typography sx={{ ...textShadow }} variant="h5" color={color}>
-              Fortnite geting gang banged
+              Katarina Pintakill Howlingabys
             </Typography>
           </Slide>
         </Grid>
