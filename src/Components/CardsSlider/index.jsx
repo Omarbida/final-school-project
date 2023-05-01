@@ -220,7 +220,24 @@ function Card({ item, index, arr }) {
             }}
           >
             <Grid container height={"100%"}>
-              <Grid item container xs={12}></Grid>
+              <Grid
+                item
+                container
+                xs={12}
+                gap={1}
+                paddingLeft={2}
+                paddingTop={1}
+              >
+                <Typography color={"primary"} variant="body1">
+                  #tag1
+                </Typography>
+                <Typography color={"primary"} variant="body1">
+                  #tag2
+                </Typography>
+                <Typography color={"primary"} variant="body1">
+                  #tag3
+                </Typography>
+              </Grid>
               <Grid
                 item
                 container
@@ -246,7 +263,7 @@ function Card({ item, index, arr }) {
                 paddingRight={1}
               >
                 <Typography variant="body1" color={"primary"}>
-                  155k
+                  {show ? "155 022" : "155k"}
                 </Typography>
                 <FavoriteIcon color="primary" />
               </Grid>
@@ -270,18 +287,20 @@ function Card({ item, index, arr }) {
           >
             <PoligonAvatar size={"50px"} />
           </Grid>
-          <Grid item container xs={10} alignItems={"center"}>
+          <Grid item container xs={10} alignItems={"center"} paddingRight={1}>
             <Typography
               sx={{
                 fontWeight: "700",
                 fontSize: "18px",
+                fontWeight: "700",
+                fontSize: "18px",
+                whiteSpace: show ? "normal" : "nowrap",
+                textOverflow: show ? "clip" : "ellipsis",
+                overflow: show ? "visible" : "hidden",
               }}
-              color={"white"}
-              variant="body1"
-              textOverflow={"ellipsis"}
-              overflow={"hidden"}
+              variant={"body1"}
             >
-              hello there matherfucker piece of shit
+              hello there matherfucker piece of shite
             </Typography>
           </Grid>
         </Grid>
