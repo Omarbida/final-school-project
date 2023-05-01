@@ -54,7 +54,6 @@ function VideoPlayer({ video }) {
     <Box
       sx={{
         position: "relative",
-        height: "100%",
       }}
     >
       <ReactPlayer

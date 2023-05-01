@@ -2,6 +2,7 @@ import { Box, Button, Container, Tooltip, Typography } from "@mui/material";
 import PoligonAvatar from "../../Components/PoligonAvatar";
 import ReplyIcon from "@mui/icons-material/Reply";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 function VideoInfoSection() {
   return (
     <Container
@@ -57,7 +58,7 @@ function VideoInfoSection() {
           >
             <Tooltip placement={"top"} title={"Well Played"}>
               <Button variant="contained" color="secondary">
-                <MilitaryTechIcon fontSize={"large"} />
+                <FavoriteBorderIcon fontSize={"large"} />
               </Button>
             </Tooltip>
             <Tooltip placement={"top"} title="Share">

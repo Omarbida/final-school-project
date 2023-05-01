@@ -1,7 +1,9 @@
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import Discription from "../Components/Discription";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  const navigate = useNavigate();
   return (
     <Container
       sx={{
@@ -60,10 +62,20 @@ function Signup() {
           type="password"
         />
 
-        <Button variant="contained">Sign Up</Button>
+        <Button
+          sx={{
+            borderRadius: "5px",
+          }}
+          variant="contained"
+        >
+          Sign Up
+        </Button>
       </Box>
       <Typography mt={2} textAlign={"center"} fontSize={13}>
-        Already have an account ? <Button variant="text">Login</Button>
+        Already have an account ?{" "}
+        <Button onClick={() => navigate("/")} variant="text">
+          Login
+        </Button>
       </Typography>
     </Container>
   );

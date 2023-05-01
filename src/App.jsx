@@ -11,7 +11,9 @@ import {
 
 import Login from "./views/Login";
 import Signup from "./views/Signup";
-import Profile from "./views/ProfilePage";
+import VideoView from "./views/VideoView";
+import HomeView from "./views/HomeView";
+import { Route, Routes } from "react-router-dom";
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -44,7 +46,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Profile />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/video" element={<VideoView />} />
+        <Route path="/home" element={<HomeView />} />
+      </Routes>
     </ThemeProvider>
   );
 }

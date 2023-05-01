@@ -12,7 +12,7 @@ import VideoInfoSection from "../Components/sections/VideoInfoSection";
 import Comment from "../Components/Comment";
 import CreateComment from "../Components/CreateComment";
 import { useState } from "react";
-function Profile() {
+function VideoView() {
   return (
     <>
       {" "}
@@ -49,7 +49,7 @@ function Profile() {
           <Comment
             rank={2}
             comment={
-              "awdkjakj awjdlkakj wndkjaw dawdaw; ;  e lselklk fnsekf elnl"
+              "awdkjakj awjdlkakj wndkjaw dawdaw; ;  e lselklk fnsekf elnl "
             }
             userName={"souad"}
           />
@@ -79,4 +79,4 @@ function Profile() {
     </>
   );
 }
-export default Profile;
+export default VideoView;

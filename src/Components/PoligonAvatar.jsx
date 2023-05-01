@@ -24,7 +24,7 @@ const PoligonAvatar = ({ size, rank }) => {
           filter: "drop-shadow(0px 0px 5px #ffffff80)",
         }}
       >
-        <img width={"100%"} src={`ranks/rank${rank}.png`} />
+        <img width={"100%"} src={`ranks/rank${rank ? rank : "1"}.png`} />
       </Box>
       <Avatar
         sx={{
