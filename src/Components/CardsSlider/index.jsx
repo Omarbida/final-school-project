@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./Style.css";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import {
   Box,
   Container,
@@ -117,110 +118,12 @@ const Card_Slider = () => {
         >
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index, arr) => {
             return (
-              <Box
+              <Card
                 key={index + item}
-                sx={{
-                  display: "inline-block",
-                  cursor: "pointer",
-                  width: "320px",
-                  height: "100%",
-                  borderRadius: "10px",
-                  ml: index == 0 ? 0 : "5px",
-                  mr: arr.length == index ? 0 : "5px",
-                  boxShadow: "5px 5px 1.25rem 0px rgb(0 0 0 / 12%)",
-                  position: "relative",
-                  transition: "all 0.2s ease",
-                  ":hover": {
-                    scale: "1.03",
-                  },
-                }}
-                component={Paper}
-                elevation={24}
-              >
-                <Box
-                  sx={{
-                    position: "absolute",
-                    top: "0",
-                    bottom: "0",
-                    left: "0",
-                    right: "0",
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      width: "100%",
-                      height: "210px",
-                      background: "grey",
-                      borderTopLeftRadius: "10px",
-                      borderTopRightRadius: "10px",
-                      objectFit: "cover",
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                      backgroundPosition: "center",
-                      position: "relative",
-                    }}
-                    style={{
-                      backgroundImage: `url(bg${index + 1}.jpg)`,
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        top: 0,
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        display: "flex",
-                        zIndex: 100,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <PlayCircleIcon
-                        fontSize="large"
-                        color="primary"
-                        sx={{
-                          scale: "1.5",
-                        }}
-                      />
-                    </Box>
-                  </Box>
-                  <Grid
-                    container
-                    sx={{
-                      flexGrow: "1",
-                    }}
-                  >
-                    <Grid
-                      item
-                      container
-                      alignItems={"center"}
-                      xs={2}
-                      sx={{
-                        alignItems: "center",
-                      }}
-                    >
-                      <PoligonAvatar size={"50px"} />
-                    </Grid>
-                    <Grid item container xs={10} alignItems={"center"}>
-                      <Typography
-                        sx={{
-                          fontWeight: "700",
-                          fontSize: "18px",
-                        }}
-                        color={"white"}
-                        variant="body1"
-                        textOverflow={"ellipsis"}
-                        overflow={"hidden"}
-                      >
-                        hello there matherfucker piece of shit
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </Box>
-              </Box>
+                item={item}
+                index={index}
+                arr={arr.length}
+              />
             );
           })}
         </Box>
@@ -249,3 +152,140 @@ const Card_Slider = () => {
   );
 };
 export default Card_Slider;
+
+function Card({ item, index, arr }) {
+  const [show, setShow] = useState(false);
+  return (
+    <Box
+      key={index + item}
+      sx={{
+        display: "inline-block",
+        cursor: "pointer",
+        width: "320px",
+        height: "100%",
+        borderRadius: "10px",
+        ml: index == 0 ? 0 : "5px",
+        mr: arr == index ? 0 : "5px",
+        boxShadow: "5px 5px 1.25rem 0px rgb(0 0 0 / 12%)",
+        position: "relative",
+        transition: "all 0.2s ease",
+        ":hover": {
+          scale: "1.03",
+        },
+      }}
+      component={Paper}
+      elevation={24}
+      onMouseEnter={() => setShow(true)}
+      onMouseLeave={() => setShow(false)}
+    >
+      <Box
+        sx={{
+          position: "absolute",
+          top: "0",
+          bottom: "0",
+          left: "0",
+          right: "0",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Box
+          sx={{
+            width: "100%",
+            height: "210px",
+            background: "grey",
+            borderTopLeftRadius: "10px",
+            borderTopRightRadius: "10px",
+            objectFit: "cover",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+            position: "relative",
+          }}
+          style={{
+            backgroundImage: `url(bg${index + 1}.jpg)`,
+          }}
+        >
+          <Box
+            sx={{
+              position: "absolute",
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              display: "flex",
+              zIndex: 98,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Grid container height={"100%"}>
+              <Grid item container xs={12}></Grid>
+              <Grid
+                item
+                container
+                xs={12}
+                justifyContent={"center"}
+                alignItems={"center"}
+              >
+                <PlayCircleIcon
+                  fontSize="large"
+                  color="primary"
+                  sx={{
+                    scale: "1.5",
+                    visibility: show ? "visible" : "hidden",
+                  }}
+                />
+              </Grid>
+              <Grid
+                item
+                container
+                xs={12}
+                justifyContent={"flex-end"}
+                alignItems={"end"}
+                paddingRight={1}
+              >
+                <Typography variant="body1" color={"primary"}>
+                  155k
+                </Typography>
+                <FavoriteIcon color="primary" />
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        <Grid
+          container
+          sx={{
+            flexGrow: "1",
+          }}
+        >
+          <Grid
+            item
+            container
+            alignItems={"center"}
+            xs={2}
+            sx={{
+              alignItems: "center",
+            }}
+          >
+            <PoligonAvatar size={"50px"} />
+          </Grid>
+          <Grid item container xs={10} alignItems={"center"}>
+            <Typography
+              sx={{
+                fontWeight: "700",
+                fontSize: "18px",
+              }}
+              color={"white"}
+              variant="body1"
+              textOverflow={"ellipsis"}
+              overflow={"hidden"}
+            >
+              hello there matherfucker piece of shit
+            </Typography>
+          </Grid>
+        </Grid>
+      </Box>
+    </Box>
+  );
+}
