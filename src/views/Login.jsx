@@ -1,6 +1,7 @@
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import Discription from "../Components/Discription";
 import { useNavigate } from "react-router-dom";
+import { ROUTS } from "../consts";
 
 function Login() {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ function Login() {
       </Box>
       <Typography mt={2} textAlign={"center"} fontSize={13}>
         Don't have an account ?{" "}
-        <Button onClick={() => navigate("/signup")} variant="text">
+        <Button onClick={() => navigate(ROUTS.SIGNUP)} variant="text">
           Signup
         </Button>
       </Typography>

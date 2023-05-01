@@ -14,6 +14,7 @@ import Signup from "./views/Signup";
 import VideoView from "./views/VideoView";
 import HomeView from "./views/HomeView";
 import { Route, Routes } from "react-router-dom";
+import { ROUTS } from "./consts";
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -47,10 +48,10 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/video" element={<VideoView />} />
-        <Route path="/home" element={<HomeView />} />
+        <Route path={ROUTS.LOGIN} element={<Login />} />
+        <Route path={ROUTS.SIGNUP} element={<Signup />} />
+        <Route path={ROUTS.VIDEO_VIEW} element={<VideoView />} />
+        <Route path={ROUTS.HOME} element={<HomeView />} />
       </Routes>
     </ThemeProvider>
   );
