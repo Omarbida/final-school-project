@@ -13,17 +13,27 @@ import Header from "../Components/Header";
 import ProfileJumbotron from "../Components/ProfileComponents/ProfileJumbotron";
 import SearchIcon from "@mui/icons-material/Search";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import { useState } from "react";
 function ProfilView() {
   return (
     <>
       <Header />
+
+      <ProfileJumbotron />
       <Container maxWidth={"md"}>
-        <ProfileJumbotron />
         <Grid container spacing={3} mt={0}>
           <Grid item container xs={12}>
-            <Grid item container xs={6} alignItems={"center"}>
-              <Typography variant="h5"> Colections</Typography>
+            <Grid
+              item
+              container
+              xs={6}
+              alignItems={"center"}
+              justifyContent={"center"}
+            >
+              <Typography variant="h5">
+                5 Collections with 125 Clips in Total:
+              </Typography>
             </Grid>
             <Grid item container xs={6} justifyContent={"end"}>
               <TextField
@@ -71,22 +81,79 @@ function ColectionItem({ image }) {
 }
 function OverLay({ show }) {
   return (
-    <Box
-      width={"50%"}
-      height={"50%"}
-      position={"absolute"}
-      bottom={0}
-      right={0}
-      display={"flex"}
-      alignItems={"center"}
-      justifyContent={"center"}
-      bgcolor={"rgba(0, 0, 0, 0.7)"}
-      sx={{
-        backdropFilter: "blur(3px)",
-      }}
-    >
-      <PlaylistAddIcon fontSize="large" color={show ? "primary" : "white"} />
-    </Box>
+    <>
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 8,
+          p: 1,
+          boxShadow: "inset 0 0 30px black",
+        }}
+      >
+        <Typography
+          sx={{
+            fontWeight: "700",
+            fontSize: "18px",
+            fontWeight: "700",
+            fontSize: "18px",
+            whiteSpace: show ? "normal" : "nowrap",
+            textOverflow: show ? "clip" : "ellipsis",
+            overflow: show ? "visible" : "hidden",
+            textShadow: "1px 1px 10px black",
+          }}
+          variant={"body1"}
+          color={"primary"}
+        >
+          Collection name the name is long so long
+        </Typography>
+      </Box>
+      <Box
+        width={"70%"}
+        height={"70%"}
+        position={"absolute"}
+        bottom={0}
+        right={0}
+        display={"flex"}
+        alignItems={"flex-end"}
+        justifyContent={"flex-end"}
+        bgcolor={"rgba(0, 0, 0, 0.7)"}
+        pr={3}
+        pb={4}
+        zIndex={9}
+        sx={{
+          clipPath: "polygon(100% 0, 0% 100%, 100% 100%)",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h7" color={show ? "primary" : "white"}>
+            +15
+          </Typography>
+          <MenuOpenIcon fontSize="large" color={show ? "primary" : "white"} />
+        </Box>
+      </Box>
+      <Box
+        width={"50%"}
+        height={"50%"}
+        position={"absolute"}
+        bottom={0}
+        right={0}
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        sx={{
+          backdropFilter: "blur(3px)",
+        }}
+      ></Box>
+    </>
   );
 }
 function Card() {
@@ -110,6 +177,8 @@ function Card() {
         height={"300px"}
         component={Paper}
         elevation={3}
+        borderRadius={"10px"}
+        overflow={"hidden"}
         sx={{
           position: "relative",
           cursor: "pointer",
@@ -125,36 +194,28 @@ function Card() {
         <ColectionItem image={"url(bg2.jpg)"} />
         <ColectionItem image={"url(bg4.jpg)"} />
         <ColectionItem image={"url(bg5.jpg)"} />
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            zIndex: 8,
-            p: 1,
-            boxShadow: "inset 0 0 30px black",
-          }}
-        >
-          <Typography
-            sx={{
-              fontWeight: "700",
-              fontSize: "18px",
-              fontWeight: "700",
-              fontSize: "18px",
-              whiteSpace: hovered ? "normal" : "nowrap",
-              textOverflow: hovered ? "clip" : "ellipsis",
-              overflow: hovered ? "visible" : "hidden",
-              textShadow: "1px 1px 10px black",
-            }}
-            variant={"body1"}
-            color={"primary"}
-          >
-            Collection name the name is long so long
-          </Typography>
-        </Box>
       </Grid>
     </Grid>
   );
 }
+
+// function OverLay({ show }) {
+//   return (
+//     <Box
+//       width={"50%"}
+//       height={"50%"}
+//       position={"absolute"}
+//       bottom={0}
+//       right={0}
+//       display={"flex"}
+//       alignItems={"center"}
+//       justifyContent={"center"}
+//       bgcolor={"rgba(0, 0, 0, 0.7)"}
+//       sx={{
+//         backdropFilter: "blur(3px)",
+//       }}
+//     >
+//       <PlaylistAddIcon fontSize="large" color={show ? "primary" : "white"} />
+//     </Box>
+//   );
+// }
