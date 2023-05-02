@@ -13,7 +13,10 @@ import {
 import PoligonAvatar from "./PoligonAvatar";
 import { Search } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate } from "react-router-dom";
+import { ROUTS } from "../consts";
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <AppBar position="static">
       <Container
@@ -37,7 +40,12 @@ const Header = () => {
             alignItems: "center",
           }}
         >
-          <Button variant="text">Home</Button>
+          <Button variant="text" onClick={() => navigate(ROUTS.HOME)}>
+            Home
+          </Button>
+          <Button variant="text" onClick={() => navigate(ROUTS.PROFILE_VIEW)}>
+            Profile
+          </Button>
           <TextField
             placeholder="Search"
             variant="standard"

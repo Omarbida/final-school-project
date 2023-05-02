@@ -12,6 +12,8 @@ import {
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import PoligonAvatar from "../PoligonAvatar";
+import { ROUTS } from "../../consts";
+import { useNavigate } from "react-router-dom";
 const Card_Slider = () => {
   let [scrollcard, setscrollcard] = useState(0);
   const containerRef = useRef();
@@ -157,6 +159,7 @@ const Card_Slider = () => {
 export default Card_Slider;
 
 function Card({ item, index, arr }) {
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   return (
     <Box
@@ -181,6 +184,7 @@ function Card({ item, index, arr }) {
       elevation={24}
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
+      onClick={() => navigate(ROUTS.VIDEO_VIEW)}
     >
       <Box
         sx={{
