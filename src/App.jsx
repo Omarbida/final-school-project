@@ -30,7 +30,9 @@ const theme = createTheme({
       secondary: "#00ffff80",
     },
   },
-  typography: {},
+  typography: {
+    fontFamily: "'Roboto Slab', serif",
+  },
   components: {
     MuiButton: {
       variants: [

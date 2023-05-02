@@ -12,7 +12,6 @@ import {
 import Header from "../Components/Header";
 import ProfileJumbotron from "../Components/ProfileComponents/ProfileJumbotron";
 import SearchIcon from "@mui/icons-material/Search";
-import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import { useState } from "react";
 function ProfilView() {
@@ -104,16 +103,18 @@ function OverLay({ show }) {
             textOverflow: show ? "clip" : "ellipsis",
             overflow: show ? "visible" : "hidden",
             textShadow: "1px 1px 10px black",
+            transition:
+              "white-space 0.5s ease-out, text-overflow 0.5s ease-out",
           }}
           variant={"body1"}
           color={"primary"}
         >
-          Collection name the name is long so long
+          Collection name the name is long test name
         </Typography>
       </Box>
       <Box
-        width={"70%"}
-        height={"70%"}
+        width={show ? "40%" : "70%"}
+        height={show ? "40%" : "70%"}
         position={"absolute"}
         bottom={0}
         right={0}
@@ -125,21 +126,10 @@ function OverLay({ show }) {
         pb={4}
         zIndex={9}
         sx={{
+          transition: "all 0.5s ease",
           clipPath: "polygon(100% 0, 0% 100%, 100% 100%)",
         }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <Typography variant="h7" color={show ? "primary" : "white"}>
-            +15
-          </Typography>
-          <MenuOpenIcon fontSize="large" color={show ? "primary" : "white"} />
-        </Box>
-      </Box>
+      ></Box>
       <Box
         width={"50%"}
         height={"50%"}
@@ -153,6 +143,29 @@ function OverLay({ show }) {
           backdropFilter: "blur(3px)",
         }}
       ></Box>
+      <Box
+        width={"50%"}
+        height={"50%"}
+        position={"absolute"}
+        bottom={0}
+        right={0}
+        display={"flex"}
+        alignItems={"center"}
+        justifyContent={"center"}
+        zIndex={10}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h7" color={show ? "primary" : "white"}>
+            +15
+          </Typography>
+          <MenuOpenIcon fontSize="large" color={show ? "primary" : "white"} />
+        </Box>
+      </Box>
     </>
   );
 }
@@ -160,8 +173,6 @@ function Card() {
   const [hovered, setHovered] = useState(false);
   return (
     <Grid
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       item
       container
       xs={6}
@@ -171,6 +182,8 @@ function Card() {
       justifyContent={"center"}
     >
       <Grid
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
         container
         width={"100%"}
         maxWidth={"200px"}

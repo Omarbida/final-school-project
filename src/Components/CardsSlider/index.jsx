@@ -134,6 +134,8 @@ const Card_Slider = () => {
             scrollbarWidth: "none",
             scrollBehavior: "smooth",
             overflowY: "hidden",
+            pt: "3px",
+            pb: "3px",
             "::-webkit-scrollbar": {
               display: "none",
             },
@@ -175,16 +177,18 @@ function Card({ item, index, arr }) {
         boxShadow: "5px 5px 1.25rem 0px rgb(0 0 0 / 12%)",
         position: "relative",
         transition: "all 0.2s ease",
-        flexShrink: 0,
+        pt: 1,
+        pb: 1,
+
         ":hover": {
-          scale: "1.03",
+          boxShadow: "0 0 5px white",
         },
       }}
-      component={Paper}
-      elevation={24}
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
       onClick={() => navigate(ROUTS.VIDEO_VIEW)}
+      component={Paper}
+      elevation={24}
     >
       <Box
         sx={{
