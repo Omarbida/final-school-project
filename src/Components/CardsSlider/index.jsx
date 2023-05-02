@@ -308,7 +308,7 @@ function Card({ item, index, arr }) {
               }}
               variant={"body1"}
             >
-              Collection name the name is long so long
+              Video name the name is long so long
             </Typography>
           </Grid>
         </Grid>
