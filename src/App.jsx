@@ -15,11 +15,12 @@ import VideoView from "./views/VideoView";
 import HomeView from "./views/HomeView";
 import { Route, Routes } from "react-router-dom";
 import { ROUTS } from "./consts";
+import ProfilView from "./views/profileView";
 const theme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#00ffff80",
+      main: "#00ffff",
     },
     secondary: {
       main: "#5e7d7d80",
@@ -52,6 +53,7 @@ function App() {
         <Route path={ROUTS.SIGNUP} element={<Signup />} />
         <Route path={ROUTS.VIDEO_VIEW} element={<VideoView />} />
         <Route path={ROUTS.HOME} element={<HomeView />} />
+        <Route path={ROUTS.PROFILE_VIEW} element={<ProfilView />} />
       </Routes>
     </ThemeProvider>
   );

@@ -33,7 +33,9 @@ const PoligonAvatar = ({ size, rank }) => {
           height: "80%",
           width: "80%",
         }}
-      ></Avatar>
+      >
+        <Box component={"img"} src="bg1.jpg" height={"100%"} />
+      </Avatar>
     </Box>
   );
 };

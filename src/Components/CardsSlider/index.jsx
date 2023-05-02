@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import "./Style.css";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import {
