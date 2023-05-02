@@ -37,6 +37,7 @@ const Header = () => {
             alignItems: "center",
           }}
         >
+          <Button variant="text">Home</Button>
           <TextField
             placeholder="Search"
             variant="standard"
@@ -51,7 +52,6 @@ const Header = () => {
             }}
           />
 
-          <Button variant="text">Home</Button>
           <PoligonAvatar size={"60px"} rank={3} />
         </Box>
       </Container>
