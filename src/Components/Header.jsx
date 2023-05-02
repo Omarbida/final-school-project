@@ -15,12 +15,12 @@ import { Search } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import { ROUTS } from "../consts";
-const Header = () => {
+const Header = ({ maxWidth }) => {
   const navigate = useNavigate();
   return (
     <AppBar position="static">
       <Container
-        maxWidth={"md"}
+        maxWidth={maxWidth ? maxWidth : "md"}
         sx={{
           display: "flex",
           justifyContent: "space-between",

@@ -14,7 +14,7 @@ function ProfileJumbotron() {
         backgroundPosition: "center",
         backgroundSize: "cover",
         height: "30vw",
-        minHeight: "200px",
+        minHeight: "150px",
       }}
     >
       <Container maxWidth="md">

@@ -88,7 +88,7 @@ const Card_Slider = () => {
           sx={{
             position: "absolute",
             zIndex: "100",
-            top: "5px",
+            top: "120px",
             left: "5px",
             bgcolor: "#000000b5",
             scale: "1.1",
@@ -109,7 +109,7 @@ const Card_Slider = () => {
           sx={{
             position: "absolute",
             zIndex: "100",
-            top: "5px",
+            top: "120px",
             scale: "1.1",
             right: "5px",
             bgcolor: "#000000b5",

@@ -3,7 +3,7 @@ import Card_Slider from "../Components/CardsSlider";
 function HomeView() {
   return (
     <>
-      <Header />
+      <Header maxWidth={"lg"} />
       <Card_Slider />
       <Card_Slider />
     </>

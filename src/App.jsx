@@ -31,7 +31,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "'Roboto Slab', serif",
+    fontFamily: "'Changa', sans-serif",
   },
   components: {
     MuiButton: {
