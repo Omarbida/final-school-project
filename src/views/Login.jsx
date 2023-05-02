@@ -36,6 +36,7 @@ function Login() {
         />
 
         <Button
+          onClick={() => navigate(ROUTS.HOME)}
           sx={{
             borderRadius: "5px",
           }}
