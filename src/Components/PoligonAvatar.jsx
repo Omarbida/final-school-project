@@ -8,7 +8,7 @@ const PoligonAvatar = ({ size, rank }) => {
         width: size ? size : "100px",
         position: "relative",
         display: "flex",
-        flexDirection: "column",
+        justifyContent: "center",
         alignItems: "center",
       }}
     >
