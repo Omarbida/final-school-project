@@ -58,6 +58,7 @@ const Card_Slider = () => {
         component={Paper}
         elevation={1}
       >
+        {/*shadowleft*/}
         <Box
           sx={{
             position: "absolute",
@@ -69,6 +70,7 @@ const Card_Slider = () => {
             background: "linear-gradient(270deg,transparent , #121212)",
           }}
         ></Box>
+        {/*shadow right*/}
         <Box
           sx={{
             position: "absolute",
@@ -80,6 +82,7 @@ const Card_Slider = () => {
             background: "linear-gradient(90deg,transparent , #121212)",
           }}
         ></Box>
+        {/*button left */}
         <IconButton
           sx={{
             position: "absolute",
@@ -100,33 +103,7 @@ const Card_Slider = () => {
             fontSize="larg"
           />
         </IconButton>
-        <Box
-          sx={{
-            width: "100%",
-            height: "100%",
-            whiteSpace: "nowrap",
-            overflowX: "scroll",
-            scrollbarWidth: "none",
-            scrollBehavior: "smooth",
-
-            "::-webkit-scrollbar": {
-              display: "none",
-            },
-          }}
-          style={{ scrollLeft: scrollcard }}
-          ref={containerRef}
-        >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index, arr) => {
-            return (
-              <Card
-                key={index + item}
-                item={item}
-                index={index}
-                arr={arr.length}
-              />
-            );
-          })}
-        </Box>
+        {/*button right */}
         <IconButton
           sx={{
             position: "absolute",
@@ -147,6 +124,33 @@ const Card_Slider = () => {
             fontSize="larg"
           />
         </IconButton>
+        <Box
+          sx={{
+            width: "100%",
+            height: "100%",
+            whiteSpace: "nowrap",
+            overflowX: "scroll",
+            scrollbarWidth: "none",
+            scrollBehavior: "smooth",
+            overflowY: "hidden",
+            "::-webkit-scrollbar": {
+              display: "none",
+            },
+          }}
+          style={{ scrollLeft: scrollcard }}
+          ref={containerRef}
+        >
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index, arr) => {
+            return (
+              <Card
+                key={index + item}
+                item={item}
+                index={index}
+                arr={arr.length}
+              />
+            );
+          })}
+        </Box>
       </Box>
     </Container>
   );
@@ -169,6 +173,7 @@ function Card({ item, index, arr }) {
         boxShadow: "5px 5px 1.25rem 0px rgb(0 0 0 / 12%)",
         position: "relative",
         transition: "all 0.2s ease",
+        flexShrink: 0,
         ":hover": {
           scale: "1.03",
         },
