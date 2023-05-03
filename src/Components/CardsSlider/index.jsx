@@ -292,14 +292,12 @@ function Card({ item, index, arr }) {
             item
             container
             alignItems={"center"}
-            xs={2}
-            sx={{
-              alignItems: "center",
-            }}
+            justifyContent={"center"}
+            xs={3}
           >
             <PoligonAvatar size={"50px"} />
           </Grid>
-          <Grid item container xs={10} alignItems={"center"} paddingRight={1}>
+          <Grid item container xs={9} alignItems={"center"} paddingRight={1}>
             <Typography
               sx={{
                 fontWeight: "700",

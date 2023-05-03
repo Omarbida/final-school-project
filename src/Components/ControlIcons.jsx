@@ -86,6 +86,7 @@ const ControlIcons = ({
   }, [mouseMoving, setShow]);
   return (
     <>
+      <Overlay show={show} playing={playing} container={containerRef.current} />
       <Box
         sx={{
           position: "absolute",
@@ -181,7 +182,6 @@ const ControlIcons = ({
               container={containerRef.current}
             >
               <Box display={"flex"}>
-                <Overlay show={show} />
                 <IconButton
                   sx={ButtonIconsStyle}
                   aria-label="play"
@@ -246,28 +246,38 @@ const ControlIcons = ({
 
 export default ControlIcons;
 
-function Overlay() {
+function Overlay({ show, playing }) {
   return (
     <Box
       sx={{
         position: "absolute",
         right: 0,
-        top: "10%",
-        bottom: 0,
+        height: "100%",
+        top: 0,
         width: "10%",
         display: "flex",
         flexDirection: "column",
         alignItems: "end",
-        justifyContent: "flex-start",
+        justifyContent: "center",
+        overflow: "hidden",
         zIndex: "10",
         ...ButtonIconsStyle,
       }}
     >
-      <RankButton rank={1} />
-      <RankButton rank={2} />
-      <RankButton rank={3} />
-      <RankButton rank={4} />
-      <RankButton rank={5} />
+      <Slide timeout={100} direction="left" in={!playing || show} mountOnEnter>
+        <Box
+          display={"flex"}
+          alignItems={"flex-end"}
+          flexDirection={"column"}
+          gap={"1vw"}
+        >
+          <RankButton rank={1} />
+          <RankButton rank={2} />
+          <RankButton rank={3} />
+          <RankButton rank={4} />
+          <RankButton rank={5} />
+        </Box>
+      </Slide>
     </Box>
   );
 }
@@ -281,10 +291,8 @@ function RankButton({ rank }) {
       disableRipple
       variant="text"
       sx={{
-        display: "flext",
-        alignItems: "center",
-        justifyContent: "center",
-
+        p: 0,
+        width: "80%",
         ":hover": {
           background: "none",
           "& img": {
@@ -298,8 +306,8 @@ function RankButton({ rank }) {
           transition: "all 0.2s ease-in-out",
         }}
         component={"img"}
-        width={"100%"}
-        src={`ranks/rank${rank}.png`}
+        width={"4vw"}
+        src={`ranks/rank${rank}badge.png`}
       />
     </Button>
   );
