@@ -52,7 +52,6 @@ const Card_Slider = () => {
           display: "flex",
           alignItems: "center",
           borderRadius: "5px",
-          overflow: "hidden",
           pt: "3px",
           pb: "3px",
         }}
@@ -133,7 +132,7 @@ const Card_Slider = () => {
             overflowX: "scroll",
             scrollbarWidth: "none",
             scrollBehavior: "smooth",
-            overflowY: "hidden",
+            overflow: "hidden",
             pt: "3px",
             pb: "3px",
             "::-webkit-scrollbar": {
@@ -295,7 +294,7 @@ function Card({ item, index, arr }) {
             justifyContent={"center"}
             xs={3}
           >
-            <PoligonAvatar size={"50px"} />
+            <PoligonAvatar size={"45px"} />
           </Grid>
           <Grid item container xs={9} alignItems={"center"} paddingRight={1}>
             <Typography
