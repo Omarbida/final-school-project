@@ -8,6 +8,7 @@ import {
   Grid,
   Slide,
   Zoom,
+  Button,
 } from "@mui/material";
 import {
   PlayArrowSharp,
@@ -16,8 +17,8 @@ import {
   VolumeOff,
 } from "@mui/icons-material";
 
-const ButtonIconsStyle = {
-  filter: "drop-shadow(2px 2px 5px aqua)",
+export const ButtonIconsStyle = {
+  filter: "drop-shadow(2px 2px 5px rgba(0, 255, 255, 0.5))",
 };
 const color = "#fff";
 
@@ -84,160 +85,222 @@ const ControlIcons = ({
     return () => clearTimeout(timer);
   }, [mouseMoving, setShow]);
   return (
-    <Box
-      sx={{
-        position: "absolute",
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        zIndex: 2,
-        background: playing ? "transparent" : "rgba(0, 0, 0, 0.6)",
-        transition: "all 0.3s ease",
-        userSelect: "none",
-      }}
-      onClick={playandpause}
-      onMouseMove={handleMouseMove}
-    >
-      {/*topsextion*/}
-      <Grid
-        container
-        direction="row"
-        alignItems="center"
-        justifyContent="start"
-        sx={{ padding: 2 }}
-        ref={containerRef}
-        overflow={"hidden"}
+    <>
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          zIndex: 2,
+          background: playing ? "transparent" : "rgba(0, 0, 0, 0.6)",
+          transition: "all 0.3s ease",
+          userSelect: "none",
+        }}
+        onClick={playandpause}
+        onMouseMove={handleMouseMove}
       >
-        <Grid item>
-          <Slide
-            timeout={100}
-            direction="right"
+        {/*topsextion*/}
+        <Grid
+          container
+          direction="row"
+          alignItems="center"
+          justifyContent="start"
+          sx={{ padding: 2 }}
+          ref={containerRef}
+          overflow={"hidden"}
+        >
+          <Grid item>
+            <Slide
+              timeout={100}
+              direction="right"
+              in={!playing}
+              mountOnEnter
+              container={containerRef.current}
+            >
+              <Typography sx={{ ...textShadow }} variant="h5" color={color}>
+                Katarina Pintakill Howlingabys
+              </Typography>
+            </Slide>
+          </Grid>
+        </Grid>
+        {/*midle section*/}
+        <Grid
+          container
+          direction="row"
+          alignItems="center"
+          justifyContent="space-around"
+        >
+          <Zoom
+            timeout={150}
             in={!playing}
             mountOnEnter
             container={containerRef.current}
           >
-            <Typography sx={{ ...textShadow }} variant="h5" color={color}>
-              Katarina Pintakill Howlingabys
-            </Typography>
-          </Slide>
-        </Grid>
-      </Grid>
-      {/*midle section*/}
-      <Grid
-        container
-        direction="row"
-        alignItems="center"
-        justifyContent="space-around"
-      >
-        <Zoom
-          timeout={150}
-          in={!playing}
-          mountOnEnter
-          container={containerRef.current}
-        >
-          <IconButton
-            sx={{ ...ButtonIconsStyle, scale: "2" }}
-            aria-label="play"
-            onClick={playandpause}
-          >
-            <PlayArrowSharp
-              fontSize="large"
-              sx={{
-                color: color,
-              }}
-            />
-          </IconButton>
-        </Zoom>
-      </Grid>
-      {/* Bottom Section */}
-      <Grid
-        container
-        direction="row"
-        alignItems="center"
-        justifyContent="space-between"
-      >
-        <Grid
-          item
-          container
-          paddingRight={2}
-          xs={12}
-          direction="row"
-          justifyContent={"flex-end"}
-          sx={{
-            overflow: "hidden",
-          }}
-        >
-          <Slide
-            timeout={100}
-            direction="left"
-            in={!playing || show}
-            mountOnEnter
-            container={containerRef.current}
-          >
-            <Box display={"flex"}>
-              <IconButton
-                sx={ButtonIconsStyle}
-                aria-label="play"
-                onClick={handleMute}
-              >
-                {!!mute ? (
-                  <VolumeOff
-                    fontSize="large"
-                    sx={{
-                      color: color,
-                    }}
-                  />
-                ) : (
-                  <VolumeUp
-                    fontSize="large"
-                    sx={{
-                      color: color,
-                    }}
-                  />
-                )}
-              </IconButton>
-              <IconButton sx={ButtonIconsStyle} aria-label="play">
-                <Fullscreen
-                  fontSize="large"
-                  sx={{
-                    color: color,
-                  }}
-                />
-              </IconButton>
-              <Box
+            <IconButton
+              sx={{ ...ButtonIconsStyle, scale: "2" }}
+              aria-label="play"
+              onClick={playandpause}
+            >
+              <PlayArrowSharp
+                fontSize="large"
                 sx={{
-                  display: "flex",
-                  alignItems: "center",
+                  color: color,
                 }}
-              >
-                {" "}
-                <Typography
-                  variant="h6"
-                  sx={textShadow}
-                  color={color}
-                  fontWeight={"bold"}
+              />
+            </IconButton>
+          </Zoom>
+        </Grid>
+        {/* Bottom Section */}
+        <Grid
+          container
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Grid
+            item
+            container
+            paddingRight={2}
+            xs={12}
+            direction="row"
+            justifyContent={"flex-end"}
+            sx={{
+              overflow: "hidden",
+            }}
+          >
+            <Slide
+              timeout={100}
+              direction="left"
+              in={!playing || show}
+              mountOnEnter
+              container={containerRef.current}
+            >
+              <Box display={"flex"}>
+                <Overlay show={show} />
+                <IconButton
+                  sx={ButtonIconsStyle}
+                  aria-label="play"
+                  onClick={handleMute}
                 >
-                  {rmainingTinme}
-                </Typography>
+                  {!!mute ? (
+                    <VolumeOff
+                      fontSize="large"
+                      sx={{
+                        color: color,
+                      }}
+                    />
+                  ) : (
+                    <VolumeUp
+                      fontSize="large"
+                      sx={{
+                        color: color,
+                      }}
+                    />
+                  )}
+                </IconButton>
+                <IconButton sx={ButtonIconsStyle} aria-label="play">
+                  <Fullscreen
+                    fontSize="large"
+                    sx={{
+                      color: color,
+                    }}
+                  />
+                </IconButton>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  {" "}
+                  <Typography
+                    variant="h6"
+                    sx={textShadow}
+                    color={color}
+                    fontWeight={"bold"}
+                  >
+                    {rmainingTinme}
+                  </Typography>
+                </Box>
               </Box>
-            </Box>
-          </Slide>
+            </Slide>
+          </Grid>
+          <Grid container item xs={12}>
+            <PrettoSlider
+              min={0}
+              max={100}
+              value={played * 100}
+              defaultValue={20}
+            />
+          </Grid>
         </Grid>
-        <Grid container item xs={12}>
-          <PrettoSlider
-            min={0}
-            max={100}
-            value={played * 100}
-            defaultValue={20}
-          />
-        </Grid>
-      </Grid>
-    </Box>
+      </Box>
+    </>
   );
 };
 
 export default ControlIcons;
+
+function Overlay() {
+  return (
+    <Box
+      sx={{
+        position: "absolute",
+        right: 0,
+        top: "10%",
+        bottom: 0,
+        width: "10%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "end",
+        justifyContent: "flex-start",
+        zIndex: "10",
+        ...ButtonIconsStyle,
+      }}
+    >
+      <RankButton rank={1} />
+      <RankButton rank={2} />
+      <RankButton rank={3} />
+      <RankButton rank={4} />
+      <RankButton rank={5} />
+    </Box>
+  );
+}
+
+function RankButton({ rank }) {
+  return (
+    <Button
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+      disableRipple
+      variant="text"
+      sx={{
+        display: "flext",
+        alignItems: "center",
+        justifyContent: "center",
+
+        ":hover": {
+          background: "none",
+          "& img": {
+            transform: "translateX(-20%)",
+          },
+        },
+      }}
+    >
+      <Box
+        sx={{
+          transition: "all 0.2s ease-in-out",
+        }}
+        component={"img"}
+        width={"100%"}
+        src={`ranks/rank${rank}.png`}
+      />
+    </Button>
+  );
+}

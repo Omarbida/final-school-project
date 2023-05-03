@@ -1,6 +1,9 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, IconButton, Typography } from "@mui/material";
 import VideoPlayer from "../VideoPlayer";
 import { useEffect, useRef } from "react";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
+import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
+import { ButtonIconsStyle } from "../ControlIcons";
 
 function VideoSection() {
   return (
@@ -14,6 +17,9 @@ function VideoSection() {
           position: "relative",
         }}
       >
+        <SideVideo>
+          <Overlay direction={270} />
+        </SideVideo>
         <Container
           maxWidth="md"
           sx={{
@@ -22,12 +28,30 @@ function VideoSection() {
         >
           <VideoPlayer video={"vids/katarinaPintakill.mp4"} />
         </Container>
+        <SideVideo>
+          <Overlay direction={90} />
+        </SideVideo>
       </Container>
     </>
   );
 }
 export default VideoSection;
-
+function SideVideo({ children }) {
+  return (
+    <Box
+      width={"15%"}
+      sx={{
+        overflow: "hidden",
+        position: "relative",
+        cursor: "pointer",
+        background: "url(bg3.jpg)",
+        backgroundSize: "cover",
+      }}
+    >
+      {children}
+    </Box>
+  );
+}
 function Overlay({ direction }) {
   return (
     <Box
@@ -40,30 +64,37 @@ function Overlay({ direction }) {
         zIndex: "5",
         background: `linear-gradient(${
           direction ? direction : 0
-        }deg ,hsla(0, 0%, 7%, 0.5), #121212)`,
-        backdropFilter: "blur(5px)",
+        }deg ,transparent,hsla(0, 0%, 7%, 0.3), #121212)`,
+        backdropFilter: "blur(3px)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
-    ></Box>
+    >
+      <IconButton
+        sx={{
+          p: 1,
+          ...ButtonIconsStyle,
+        }}
+      >
+        {direction === 90 ? (
+          <SkipNextIcon
+            sx={{
+              scale: "1.5",
+            }}
+            fontSize={"large"}
+            color="primary"
+          />
+        ) : (
+          <SkipPreviousIcon
+            sx={{
+              scale: "1.5",
+            }}
+            fontSize={"large"}
+            color="primary"
+          />
+        )}
+      </IconButton>
+    </Box>
   );
 }
-//  <Box
-//    width={"15%"}
-//    sx={{
-//      overflow: "hidden",
-//      position: "relative",
-//      cursor: "pointer",
-//      ":hover": {
-//        img: {
-//          filter: "none",
-//          scale: "1.03",
-//        },
-//        div: {
-//          background:
-//            "linear-gradient(90deg ,hsla(0, 0%, 7%, 0.5), hsla(0, 0%, 7%, 0.98))",
-//        },
-//      },
-//    }}
-//  >
-//    <img className="img" src="poppy.jpg" height={"100%"} />
-//    <Overlay direction={90} />
-//  </Box>;

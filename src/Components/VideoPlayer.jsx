@@ -1,7 +1,8 @@
 import ReactPlayer from "react-player";
 import ControlIcons from "./ControlIcons";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
+import zIndex from "@mui/material/styles/zIndex";
 function VideoPlayer({ video }) {
   const [playerstate, setPlayerState] = useState({
     playing: false,
@@ -83,3 +84,49 @@ function VideoPlayer({ video }) {
   );
 }
 export default VideoPlayer;
+
+function Overlay() {
+  return (
+    <Box
+      sx={{
+        position: "absolute",
+        right: 0,
+        top: 0,
+        bottom: 0,
+        width: "10%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "end",
+        justifyContent: "center",
+        zIndex: "10",
+      }}
+    >
+      <RankButton rank={1} />
+      <RankButton rank={2} />
+      <RankButton rank={3} />
+      <RankButton rank={4} />
+      <RankButton rank={5} />
+    </Box>
+  );
+}
+
+function RankButton({ rank }) {
+  return (
+    <Button
+      fullWidth
+      variant="text"
+      sx={{
+        transition: "all 0.2s ease-in-out",
+        paddingRight: "0",
+        paddingLeft: "20px",
+        ":hover": {
+          background: "transparent",
+          paddingRight: "20px",
+          paddingLeft: "0",
+        },
+      }}
+    >
+      <img width={"100%"} src={`ranks/rank${rank}.png`} />
+    </Button>
+  );
+}
