@@ -14,25 +14,25 @@ const PoligonAvatar = ({ size, rank }) => {
     >
       <Box
         sx={{
-          height: "40%",
+          width: "100%",
+          height: "100%",
           transform: "rotate(0deg)",
           display: "flex",
           alignItems: "center",
           zIndex: "0",
           justifyContent: "center",
-          filter: "drop-shadow(0px 0px 5px #ffffff80)",
           position: "absolute",
-          top: "0",
-          left: "-20%",
-          right: "-20%",
+          zIndex: "1",
+          transform: "translateY(4%)",
+          scale: "2",
         }}
       >
-        <img width={"100%"} src={`ranks/rank${rank ? rank : "1"}avatar.png`} />
+        <img width={"100%"} src={`ranks/rankborder${rank ? rank : "1"}.png`} />
       </Box>
       <Avatar
         sx={{
-          height: "80%",
-          width: "80%",
+          height: "100%",
+          width: "100%",
         }}
       >
         <Box component={"img"} src="bg1.jpg" height={"100%"} />

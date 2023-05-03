@@ -1,4 +1,5 @@
 import { Avatar, Box, Container, Grid, Typography } from "@mui/material";
+import PoligonAvatar from "../PoligonAvatar";
 const dropShadow = {
   filter: "drop-shadow(0 0 15px black)",
 };
@@ -18,65 +19,73 @@ function ProfileJumbotron() {
       }}
     >
       <Container maxWidth="md">
-        <Grid item container xs={12} sx={{ ...dropShadow }}>
-          <Grid
-            item
-            container
-            xs={6}
-            alignItems={"center"}
-            justifyContent={"center"}
-          >
-            <Typography
-              fontWeight={700}
-              fontSize={"4vw"}
-              sx={{ ...dropShadow }}
-              color={"primary"}
-              variant="h4"
+        <Grid
+          item
+          container
+          xs={12}
+          sx={{ ...dropShadow }}
+          alignItems={"space-between"}
+          height={"100%"}
+        >
+          <Grid item xs={12} container>
+            <Grid
+              item
+              container
+              xs={6}
+              alignItems={"center"}
+              justifyContent={"center"}
             >
-              Challanger
-            </Typography>
-          </Grid>
-          <Grid
-            item
-            container
-            xs={6}
-            alignItems={"center"}
-            justifyContent={"center"}
-          >
-            <Typography
-              fontWeight={700}
-              fontSize={"4vw"}
-              sx={{ ...dropShadow }}
-              color={"primary"}
-              variant="h4"
+              <Typography
+                fontWeight={700}
+                fontSize={"4vw"}
+                sx={{ ...dropShadow }}
+                color={"primary"}
+                variant="h4"
+              >
+                Challanger
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              container
+              xs={6}
+              alignItems={"center"}
+              justifyContent={"center"}
             >
-              Lord Bida
-            </Typography>
+              <Typography
+                fontWeight={700}
+                fontSize={"4vw"}
+                sx={{ ...dropShadow }}
+                color={"primary"}
+                variant="h4"
+              >
+                Lord Bida
+              </Typography>
+            </Grid>
           </Grid>
-          <Grid
-            item
-            container
-            xs={6}
-            alignItems={"center"}
-            justifyContent={"center"}
-          >
-            <Box component={"img"} src="ranks/rank1.png" width={"25vw"} />
-          </Grid>
-          <Grid
-            item
-            container
-            xs={6}
-            alignItems={"center"}
-            justifyContent={"center"}
-          >
-            <Avatar
-              sx={{
-                height: "15vw",
-                width: "15vw",
-              }}
+          <Grid item xs={12} container>
+            <Grid
+              item
+              container
+              xs={6}
+              alignItems={"center"}
+              justifyContent={"center"}
             >
-              <Box component={"img"} src="bg1.jpg" height={"100%"} />
-            </Avatar>
+              <Box
+                component={"img"}
+                src="ranks/rank1badge.png"
+                width={"17vw"}
+              />
+            </Grid>
+            <Grid
+              item
+              container
+              xs={6}
+              alignItems={"center"}
+              justifyContent={"center"}
+            >
+              <PoligonAvatar size={"12vw"} rank={5} />
+            </Grid>
           </Grid>
         </Grid>
       </Container>
