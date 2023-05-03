@@ -29,7 +29,12 @@ const Header = ({ maxWidth }) => {
           m: "auto",
         }}
       >
-        <Box>
+        <Box
+          sx={{
+            cursor: "pointer",
+          }}
+          onClick={() => navigate(ROUTS.HOME)}
+        >
           <img width={"55px"} src="LOGO.png" />
         </Box>
 
@@ -40,12 +45,6 @@ const Header = ({ maxWidth }) => {
             alignItems: "center",
           }}
         >
-          <Button variant="text" onClick={() => navigate(ROUTS.HOME)}>
-            Home
-          </Button>
-          <Button variant="text" onClick={() => navigate(ROUTS.PROFILE_VIEW)}>
-            Profile
-          </Button>
           <TextField
             placeholder="Search"
             variant="standard"
@@ -59,8 +58,14 @@ const Header = ({ maxWidth }) => {
               ),
             }}
           />
-
-          <PoligonAvatar size={"60px"} rank={3} />
+          <Box
+            sx={{
+              cursor: "pointer",
+            }}
+            onClick={() => navigate(ROUTS.PROFILE_VIEW)}
+          >
+            <PoligonAvatar size={"60px"} rank={3} />
+          </Box>
         </Box>
       </Container>
     </AppBar>
