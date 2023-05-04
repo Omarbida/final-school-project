@@ -17,9 +17,6 @@ function VideoSection() {
           position: "relative",
         }}
       >
-        <SideVideo>
-          <Overlay direction={270} />
-        </SideVideo>
         <Container
           maxWidth="md"
           sx={{
@@ -28,9 +25,6 @@ function VideoSection() {
         >
           <VideoPlayer video={"vids/katarinaPintakill.mp4"} />
         </Container>
-        <SideVideo>
-          <Overlay direction={90} />
-        </SideVideo>
       </Container>
     </>
   );
@@ -46,6 +40,7 @@ function SideVideo({ children }) {
         cursor: "pointer",
         background: "url(bg3.jpg)",
         backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       {children}
@@ -65,7 +60,6 @@ function Overlay({ direction }) {
         background: `linear-gradient(${
           direction ? direction : 0
         }deg ,transparent,hsla(0, 0%, 7%, 0.3), #121212)`,
-        backdropFilter: "blur(3px)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -83,7 +77,6 @@ function Overlay({ direction }) {
               scale: "1.5",
             }}
             fontSize={"large"}
-            color="primary"
           />
         ) : (
           <SkipPreviousIcon
@@ -91,7 +84,6 @@ function Overlay({ direction }) {
               scale: "1.5",
             }}
             fontSize={"large"}
-            color="primary"
           />
         )}
       </IconButton>

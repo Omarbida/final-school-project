@@ -3,6 +3,7 @@ import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import {
   Box,
+  Chip,
   Container,
   Grid,
   IconButton,
@@ -31,6 +32,7 @@ const Card_Slider = () => {
       maxWidth="lg"
       sx={{
         mt: "30px",
+        p: "0!important",
       }}
     >
       <Typography
@@ -239,15 +241,27 @@ function Card({ item, index, arr }) {
                 paddingLeft={2}
                 paddingTop={1}
               >
-                <Typography color={"primary"} variant="body1">
-                  #tag1
-                </Typography>
-                <Typography color={"primary"} variant="body1">
-                  #tag2
-                </Typography>
-                <Typography color={"primary"} variant="body1">
-                  #tag3
-                </Typography>
+                <Chip
+                  label={"tag1"}
+                  sx={{
+                    color: "black",
+                    border: "1px solid grey",
+                  }}
+                />
+                <Chip
+                  label={"tag1"}
+                  sx={{
+                    color: "black",
+                    border: "1px solid grey",
+                  }}
+                />
+                <Chip
+                  label={"tag1"}
+                  sx={{
+                    color: "black",
+                    border: "1px solid grey",
+                  }}
+                />
               </Grid>
               <Grid
                 item

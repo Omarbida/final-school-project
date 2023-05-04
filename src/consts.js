@@ -1,7 +1,7 @@
 export const ROUTS = {
-  LOGIN: "/",
+  LOGIN: "/login",
   SIGNUP: "/signup",
-  HOME: "/home",
+  HOME: "/",
   VIDEO_VIEW: "/video",
   PROFILE_VIEW: "/profile",
 };

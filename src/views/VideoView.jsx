@@ -12,10 +12,10 @@ import VideoInfoSection from "../Components/sections/VideoInfoSection";
 import Comment from "../Components/Comment";
 import CreateComment from "../Components/CreateComment";
 import { useState } from "react";
+import Card_Slider from "../Components/CardsSlider";
 function VideoView() {
   return (
     <>
-      {" "}
       <Header />
       <Container
         maxWidth={"xl"}
@@ -29,16 +29,17 @@ function VideoView() {
         <VideoSection />
 
         <VideoInfoSection />
-        <Container maxWidth={"md"}>
+        <Container
+          maxWidth={"md"}
+          sx={{
+            p: "0!important",
+            display: "flex",
+            flexDirection: "column",
+            gap: 3,
+          }}
+        >
           <CreateComment />
-          <Typography
-            sx={{
-              mb: 2,
-            }}
-            variant="h5"
-          >
-            Comments:
-          </Typography>
+
           <Comment
             rank={1}
             comment={

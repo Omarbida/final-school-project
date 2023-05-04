@@ -1,7 +1,17 @@
-import { Box, Button, Container, Tooltip, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Chip,
+  Container,
+  Divider,
+  Grid,
+  IconButton,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import PoligonAvatar from "../../Components/PoligonAvatar";
-import ReplyIcon from "@mui/icons-material/Reply";
-import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
+import ShareIcon from "@mui/icons-material/Share";
+import LinkIcon from "@mui/icons-material/Link";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 function VideoInfoSection() {
   return (
@@ -11,64 +21,82 @@ function VideoInfoSection() {
       }}
       maxWidth="md"
     >
-      <Box>
-        <Typography variant="h5">
-          Lorem ipsum dolor, sit amet consectetur{" "}
-        </Typography>
-        <Typography variant="p" color={"primary"}>
-          #Lorem #ipsum #dolor
-        </Typography>
-        <Box
+      <Grid container>
+        <Grid item container xs={7}>
+          <Typography variant="h5">
+            Lorem ipsum dolor, sit amet consectetur{" "}
+          </Typography>
+        </Grid>
+        <Grid item container xs={5} alignItems={"center"}>
+          <Grid item container xs={4} justifyContent={"center"}>
+            <Box
+              display={"flex"}
+              alignItems={"center"}
+              border={"1px solid aqua"}
+              borderRadius={"32px"}
+              gap={1}
+              p={0.6}
+              pl={1}
+            >
+              <Typography variant="body1">15.5K</Typography>
+              <Divider orientation="vertical" flexItem />
+              <Button
+                sx={{
+                  p: "0",
+                  pr: "3px",
+                  minWidth: "fit-content",
+                  ":hover": {
+                    background: "none",
+                  },
+                }}
+                disableFocusRipple
+                disableRipple
+              >
+                <FavoriteBorderIcon />
+              </Button>
+            </Box>
+          </Grid>
+          <Grid item container xs={4} justifyContent={"center"}>
+            <Tooltip placement={"top"} title="Share">
+              <Button variant="outlined">
+                <ShareIcon />
+              </Button>
+            </Tooltip>
+          </Grid>
+          <Grid item container xs={4} justifyContent={"center"}>
+            <Tooltip placement={"top"} title="Coppy link">
+              <Button variant="outlined">
+                <LinkIcon />
+              </Button>
+            </Tooltip>
+          </Grid>
+        </Grid>
+        <Grid
+          item
+          container
+          xs={12}
           sx={{
-            mt: 2,
-            display: "flex",
-            justifyContent: "space-between",
+            pt: 1,
+            pb: 1,
+            gap: 1,
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
-            }}
-          >
-            <PoligonAvatar size={"60px"} rank={2} />
-            <Box>
-              <Typography fontWeight={"800"} variant="h6">
-                Omar bida
-              </Typography>
-              <Typography>154,6k</Typography>
-            </Box>
-            <Button
-              sx={{
-                height: "fit-content",
-              }}
-              variant="contained"
-              color={"secondary"}
-            >
-              Follow
-            </Button>
+          <Chip variant="outlined" label={"league of legends"} />
+          <Chip variant="outlined" label={"Pintakill"} />
+          <Chip variant="outlined" label={"Katarina"} />
+        </Grid>
+
+        <Grid item container xs={12} alignItems={"center"} gap={3}>
+          <PoligonAvatar size={"60px"} rank={2} />
+          <Box>
+            <Typography fontWeight={"800"} variant="h6">
+              Omar bida
+            </Typography>
+            <Typography>154,6k</Typography>
           </Box>
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: 2,
-            }}
-          >
-            <Tooltip placement={"top"} title={"Well Played"}>
-              <Button variant="contained" color="secondary">
-                <FavoriteBorderIcon fontSize={"large"} />
-              </Button>
-            </Tooltip>
-            <Tooltip placement={"top"} title="Share">
-              <Button variant="contained" color="secondary">
-                <ReplyIcon fontSize={"large"} />
-              </Button>
-            </Tooltip>
-          </Box>
-        </Box>
-      </Box>
+          <Button variant="outlined">Follow</Button>
+        </Grid>
+      </Grid>
     </Container>
   );
 }
