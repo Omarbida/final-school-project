@@ -29,7 +29,7 @@ const Header = ({ maxWidth }) => {
   };
   return (
     <AppBar
-      position="static"
+      position="sticky"
       sx={{
         pl: 1,
         pr: 1,

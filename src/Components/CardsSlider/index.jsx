@@ -31,7 +31,6 @@ const Card_Slider = () => {
     <Container
       maxWidth="lg"
       sx={{
-        mt: "30px",
         p: "0!important",
       }}
     >
@@ -41,7 +40,7 @@ const Card_Slider = () => {
           mb: "10px",
         }}
         variant="body1"
-        fontSize={"30px"}
+        fontSize={"2vw"}
         color={"primary"}
       >
         Latest outplays
@@ -49,7 +48,7 @@ const Card_Slider = () => {
       <Box
         sx={{
           width: "100%",
-          height: "300px",
+          height: "200px",
           position: "relative",
           display: "flex",
           alignItems: "center",
@@ -89,10 +88,10 @@ const Card_Slider = () => {
           sx={{
             position: "absolute",
             zIndex: "100",
-            top: "120px",
-            left: "5px",
+            top: "75px",
+            left: "0px",
             bgcolor: "#000000b5",
-            scale: "1.1",
+            scale: "1",
           }}
           onClick={(e) => handlescrollLeft(e)}
         >
@@ -110,9 +109,9 @@ const Card_Slider = () => {
           sx={{
             position: "absolute",
             zIndex: "100",
-            top: "120px",
-            scale: "1.1",
-            right: "5px",
+            top: "75px",
+            scale: "1",
+            right: "0px",
             bgcolor: "#000000b5",
           }}
           color="primary"
@@ -170,7 +169,7 @@ function Card({ item, index, arr }) {
       sx={{
         display: "inline-block",
         cursor: "pointer",
-        width: "320px",
+        width: "200px",
         height: "100%",
         borderRadius: "10px",
         ml: index == 0 ? 0 : "5px",
@@ -205,7 +204,7 @@ function Card({ item, index, arr }) {
         <Box
           sx={{
             width: "100%",
-            height: "210px",
+            height: "120px",
             background: "grey",
             borderTopLeftRadius: "10px",
             borderTopRightRadius: "10px",
@@ -237,52 +236,6 @@ function Card({ item, index, arr }) {
                 item
                 container
                 xs={12}
-                gap={1}
-                paddingLeft={2}
-                paddingTop={1}
-              >
-                <Chip
-                  label={"tag1"}
-                  sx={{
-                    color: "black",
-                    border: "1px solid grey",
-                  }}
-                />
-                <Chip
-                  label={"tag1"}
-                  sx={{
-                    color: "black",
-                    border: "1px solid grey",
-                  }}
-                />
-                <Chip
-                  label={"tag1"}
-                  sx={{
-                    color: "black",
-                    border: "1px solid grey",
-                  }}
-                />
-              </Grid>
-              <Grid
-                item
-                container
-                xs={12}
-                justifyContent={"center"}
-                alignItems={"center"}
-              >
-                <PlayCircleIcon
-                  fontSize="large"
-                  color="primary"
-                  sx={{
-                    scale: "1.5",
-                    visibility: show ? "visible" : "hidden",
-                  }}
-                />
-              </Grid>
-              <Grid
-                item
-                container
-                xs={12}
                 justifyContent={"flex-end"}
                 alignItems={"end"}
                 paddingRight={1}
@@ -299,6 +252,7 @@ function Card({ item, index, arr }) {
           container
           sx={{
             flexGrow: "1",
+            justifyContent: "space-between",
           }}
         >
           <Grid
@@ -310,13 +264,11 @@ function Card({ item, index, arr }) {
           >
             <PoligonAvatar size={"45px"} />
           </Grid>
-          <Grid item container xs={9} alignItems={"center"} paddingRight={1}>
+          <Grid item container xs={8} alignItems={"center"} paddingRight={1}>
             <Typography
               sx={{
-                fontWeight: "700",
-                fontSize: "18px",
-                fontWeight: "700",
-                fontSize: "18px",
+                fontSize: "14px",
+                fontWeight: "500",
                 whiteSpace: show ? "normal" : "nowrap",
                 textOverflow: show ? "clip" : "ellipsis",
                 overflow: show ? "visible" : "hidden",
@@ -329,5 +281,20 @@ function Card({ item, index, arr }) {
         </Grid>
       </Box>
     </Box>
+  );
+}
+
+function CostomChip({ lable }) {
+  return (
+    <Chip
+      label={lable ? lable : ""}
+      sx={{
+        color: "rgba(0, 255, 255, 1)",
+        border: "1px solid grey",
+
+        fontWeight: "600",
+        backdropFilter: "blur(2px)",
+      }}
+    />
   );
 }

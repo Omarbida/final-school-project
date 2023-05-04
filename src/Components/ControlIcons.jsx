@@ -28,7 +28,7 @@ const textShadow = {
 };
 const PrettoSlider = styled(Slider)({
   cursor: "default",
-  height: "10px",
+  height: "5px",
   borderRadius: "0",
   padding: "0",
   "& .MuiSlider-track": {
@@ -86,7 +86,6 @@ const ControlIcons = ({
   }, [mouseMoving, setShow]);
   return (
     <>
-      <Overlay show={show} playing={playing} container={containerRef.current} />
       <Box
         sx={{
           position: "absolute",
@@ -123,7 +122,7 @@ const ControlIcons = ({
               mountOnEnter
               container={containerRef.current}
             >
-              <Typography sx={{ ...textShadow }} variant="h5" color={color}>
+              <Typography sx={{ ...textShadow }} variant="h6" color={color}>
                 Katarina Pintakill Howlingabys
               </Typography>
             </Slide>
@@ -143,7 +142,7 @@ const ControlIcons = ({
             container={containerRef.current}
           >
             <IconButton
-              sx={{ ...ButtonIconsStyle, scale: "2" }}
+              sx={{ ...ButtonIconsStyle }}
               aria-label="play"
               onClick={playandpause}
             >
@@ -181,22 +180,18 @@ const ControlIcons = ({
               mountOnEnter
               container={containerRef.current}
             >
-              <Box display={"flex"}>
-                <IconButton
-                  sx={ButtonIconsStyle}
-                  aria-label="play"
-                  onClick={handleMute}
-                >
+              <Box display={"flex"} alignItems={"center"}>
+                <IconButton sx={ButtonIconsStyle} onClick={handleMute}>
                   {!!mute ? (
                     <VolumeOff
-                      fontSize="large"
+                      fontSize="medium"
                       sx={{
                         color: color,
                       }}
                     />
                   ) : (
                     <VolumeUp
-                      fontSize="large"
+                      fontSize="medium"
                       sx={{
                         color: color,
                       }}
@@ -205,7 +200,7 @@ const ControlIcons = ({
                 </IconButton>
                 <IconButton sx={ButtonIconsStyle} aria-label="play">
                   <Fullscreen
-                    fontSize="large"
+                    fontSize="medium"
                     sx={{
                       color: color,
                     }}
@@ -218,12 +213,7 @@ const ControlIcons = ({
                   }}
                 >
                   {" "}
-                  <Typography
-                    variant="h6"
-                    sx={textShadow}
-                    color={color}
-                    fontWeight={"bold"}
-                  >
+                  <Typography variant="h6" sx={textShadow} color={color}>
                     {rmainingTinme}
                   </Typography>
                 </Box>
@@ -245,70 +235,3 @@ const ControlIcons = ({
 };
 
 export default ControlIcons;
-
-function Overlay({ show, playing }) {
-  return (
-    <Box
-      sx={{
-        position: "absolute",
-        right: 0,
-        height: "100%",
-        top: 0,
-        width: "10%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "end",
-        justifyContent: "center",
-        overflow: "hidden",
-        zIndex: "10",
-        ...ButtonIconsStyle,
-      }}
-    >
-      <Slide timeout={100} direction="left" in={!playing || show} mountOnEnter>
-        <Box
-          display={"flex"}
-          alignItems={"flex-end"}
-          flexDirection={"column"}
-          gap={"1vw"}
-        >
-          <RankButton rank={1} />
-          <RankButton rank={2} />
-          <RankButton rank={3} />
-          <RankButton rank={4} />
-          <RankButton rank={5} />
-        </Box>
-      </Slide>
-    </Box>
-  );
-}
-
-function RankButton({ rank }) {
-  return (
-    <Button
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
-      disableRipple
-      variant="text"
-      sx={{
-        p: 0,
-        width: "80%",
-        ":hover": {
-          background: "none",
-          "& img": {
-            transform: "translateX(-20%)",
-          },
-        },
-      }}
-    >
-      <Box
-        sx={{
-          transition: "all 0.2s ease-in-out",
-        }}
-        component={"img"}
-        width={"4vw"}
-        src={`ranks/rank${rank}badge.png`}
-      />
-    </Button>
-  );
-}

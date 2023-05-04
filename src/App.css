@@ -1,5 +1,6 @@
 video {
   object-fit: fill;
+  color: rgba(0, 255, 255, 0.5);
 }
 .img {
   filter: grayscale(70%);
