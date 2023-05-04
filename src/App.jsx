@@ -42,6 +42,12 @@ const theme = createTheme({
             borderRadius: "32px",
           },
         },
+        {
+          props: { variant: "outlined" },
+          style: {
+            borderRadius: "32px",
+          },
+        },
       ],
     },
   },
