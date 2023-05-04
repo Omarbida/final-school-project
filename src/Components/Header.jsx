@@ -83,7 +83,7 @@ const Header = ({ maxWidth }) => {
           {collapse ? (
             <Grid minWidth={"370px"}>
               <MyButton>Games</MyButton>
-              <MyButton>TopClips</MyButton>
+              <MyButton>Top-Clips</MyButton>
               <MyButton onClick={() => navigate(ROUTS.LOGIN)}>Login</MyButton>
               <MyButton onClick={() => navigate(ROUTS.SIGNUP)}>Signup</MyButton>
               <MyButton variant={"contained"}>Premium</MyButton>
