@@ -23,6 +23,54 @@ import InsertCommentIcon from "@mui/icons-material/InsertComment";
 import ShareIcon from "@mui/icons-material/Share";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import useScreenWidth from "../kooks/useScreenwith";
+
+const videos = [
+  {
+    video: "vids/kaylePintakill.webm",
+    views: "145k",
+    likes: 12,
+    comments: 32,
+    shares: 5,
+    name: "Kayle Pintakill ARAM",
+    tags: ["#league of legends", "#Pintakill", "#kayle", "#ARAM"],
+    ranks: 87,
+    rankRate: 3.4,
+  },
+  {
+    video: "vids/kalistaPintakill.webm",
+    views: "75k",
+    likes: 26,
+    comments: 10,
+    shares: 7,
+    name: "Kalista Pintakill ARAM",
+    tags: ["#league of legends", "#Pintakill", "#kalista", "#ARAM"],
+    ranks: 75,
+    rankRate: 2.7,
+  },
+  {
+    video: "vids/poppyOneshot.webm",
+    views: "513k",
+    likes: 325,
+    comments: 211,
+    shares: 112,
+    name: "assassin Poppy",
+    tags: ["#league of legends", "#oneShot", "#poppy", "#funny"],
+    ranks: 197,
+    rankRate: 4.3,
+  },
+  {
+    video: "vids/poppyOutplayJ4.webm",
+    views: "368k",
+    likes: 147,
+    comments: 97,
+    shares: 67,
+    name: "How to make J4 uninstall",
+    tags: ["#league of legends", "#outplay", "#poppy"],
+    ranks: 268,
+    rankRate: 4.8,
+  },
+];
+
 function HomeView() {
   const { is750 } = useScreenWidth();
   return (
@@ -39,9 +87,22 @@ function HomeView() {
               gap: 3,
             }}
           >
-            <VideoPaper />
-            <VideoPaper />
-            <VideoPaper />
+            {videos?.map((video, i) => {
+              return (
+                <VideoPaper
+                  key={video.name + video.likes + video.comments + i}
+                  video={video.video}
+                  views={video.views}
+                  likes={video.likes}
+                  comments={video.comments}
+                  shares={video.shares}
+                  name={video.name}
+                  tags={video.tags}
+                  ranks={video.ranks}
+                  rankRate={video.rankRate}
+                />
+              );
+            })}
           </Container>
         </Grid>
         {is750 && (
@@ -96,7 +157,17 @@ function MyIconButton({ children, value }) {
   );
 }
 
-function VideoPaper() {
+function VideoPaper({
+  video,
+  views,
+  likes,
+  comments,
+  shares,
+  rankRate,
+  name,
+  tags,
+  ranks,
+}) {
   const { is750, is450, is350, is320 } = useScreenWidth();
   return (
     <Paper
@@ -140,7 +211,7 @@ function VideoPaper() {
           <MoreVertTwoToneIcon fontSize={is350 ? "meduim" : "small"} />
         </IconButton>
       </Grid>
-      <VideoPlayer video={"vids/katarinaPintakill.mp4"} />
+      <VideoPlayer video={video} />
       <Grid mt={1} container pl={1} pr={1}>
         <Grid
           item
@@ -150,7 +221,7 @@ function VideoPaper() {
           justifyContent={"space-between"}
         >
           <Typography flexGrow={"1"} variant="body1" pl={1}>
-            156k views
+            {views ? views : "0"} views
           </Typography>
           <Box
             sx={{
@@ -161,13 +232,13 @@ function VideoPaper() {
               justifyContent: "space-between",
             }}
           >
-            <MyIconButton value={"155"}>
+            <MyIconButton value={likes ? likes : "0"}>
               <FavoriteBorderIcon fontSize="small" />
             </MyIconButton>
-            <MyIconButton value={"155"}>
+            <MyIconButton value={comments ? comments : "0"}>
               <InsertCommentIcon fontSize="small" />
             </MyIconButton>
-            <MyIconButton value={"155"}>
+            <MyIconButton value={shares ? shares : "0"}>
               <ShareIcon fontSize="small" />
             </MyIconButton>
             <MyIconButton value={"Copy link"}>
@@ -184,13 +255,13 @@ function VideoPaper() {
             variant="h6"
             fontSize={is450 ? "20px" : "15px"}
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
+            {name ? name : "error loading name"}
           </Typography>
         </Grid>
         <Grid item container xs={12} gap={1}>
-          <Chip variant="outlined" label={"#league of legends"} />
-          <Chip variant="outlined" label={"#Pintakill"} />
-          <Chip variant="outlined" label={"#Katarina"} />
+          {tags?.map((tag, i) => {
+            return <Chip key={i + tag} variant="outlined" label={tag} />;
+          })}
         </Grid>
         <Divider sx={{ width: "100%", mt: 2, mb: 1 }} />
         <Grid item container xs={12}>
@@ -201,7 +272,7 @@ function VideoPaper() {
               width={is320 ? "50px" : "40px"}
             />
             <Typography flexGrow={"1"} variant="body1" pl={1}>
-              4.2 / 124
+              {rankRate ? rankRate : "1"} / {ranks ? ranks : "0"}
             </Typography>
           </Grid>
           <Grid item container xs={12} md={8}>

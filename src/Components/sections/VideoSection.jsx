@@ -23,7 +23,7 @@ function VideoSection() {
             p: "0!important",
           }}
         >
-          <VideoPlayer video={"vids/katarinaPintakill.mp4"} />
+          <VideoPlayer video={"vids/kalistaPintakill.webm"} />
         </Container>
       </Container>
     </>
