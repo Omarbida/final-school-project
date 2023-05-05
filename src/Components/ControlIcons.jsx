@@ -15,6 +15,7 @@ import {
   VolumeUp,
   Fullscreen,
   VolumeOff,
+  Pause,
 } from "@mui/icons-material";
 import useScreenWidth from "../kooks/useScreenwith";
 
@@ -131,7 +132,11 @@ const ControlIcons = ({
               container={containerRef.current}
             >
               <IconButton sx={ButtonIconsStyle} onClick={playandpause}>
-                <PlayArrowSharp fontSize={is350 ? "large" : "medium"} />
+                {playing ? (
+                  <Pause fontSize={is350 ? "large" : "medium"} />
+                ) : (
+                  <PlayArrowSharp fontSize={is350 ? "large" : "medium"} />
+                )}
               </IconButton>
             </Slide>
             <Slide

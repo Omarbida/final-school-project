@@ -70,16 +70,25 @@ const Header = ({ maxWidth }) => {
             }}
           >
             <Grid flexGrow={1}>
-              <FormControl fullWidth>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexWrap: "nowrap",
+                  borderRadius: "32px",
+                  border: "1px solid grey",
+                }}
+              >
                 <InputBase
+                  fullWidth
                   placeholder="Search"
                   sx={{
-                    borderRadius: "32px",
-                    border: "1px solid grey",
                     p: "4px 16px",
                   }}
                 />
-              </FormControl>
+                <IconButton>
+                  <Search />
+                </IconButton>
+              </Box>
             </Grid>
             {collapse ? (
               <Grid minWidth={"370px"}>
@@ -109,15 +118,17 @@ const Header = ({ maxWidth }) => {
                   open={show}
                   onClose={() => toggleDrawer(false)}
                 >
-                  <MyButton>Games</MyButton>
-                  <MyButton>Top-Clips</MyButton>
-                  <MyButton onClick={() => navigate(ROUTS.LOGIN)}>
-                    Login
-                  </MyButton>
-                  <MyButton onClick={() => navigate(ROUTS.SIGNUP)}>
-                    Signup
-                  </MyButton>
-                  <MyButton variant={"contained"}>Premium</MyButton>
+                  <Box display={"flex"} flexDirection={"column"} pl={1} pr={1}>
+                    <MyButton>Games</MyButton>
+                    <MyButton>Top-Clips</MyButton>
+                    <MyButton onClick={() => navigate(ROUTS.LOGIN)}>
+                      Login
+                    </MyButton>
+                    <MyButton onClick={() => navigate(ROUTS.SIGNUP)}>
+                      Signup
+                    </MyButton>
+                    <MyButton variant={"contained"}>Premium</MyButton>
+                  </Box>
                 </Drawer>
               </>
             )}
