@@ -14,8 +14,9 @@ import PoligonAvatar from "../../Components/PoligonAvatar";
 import ShareIcon from "@mui/icons-material/Share";
 import LinkIcon from "@mui/icons-material/Link";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import useScreenWidth from "../../kooks/useScreenwith";
 function VideoInfoSection() {
-  const isSmall = useMediaQuery("(min-width:650px)");
+  const { is650, is350 } = useScreenWidth();
   return (
     <Container
       sx={{
@@ -24,12 +25,12 @@ function VideoInfoSection() {
       maxWidth="md"
     >
       <Grid container>
-        <Grid item container xs={isSmall ? 7 : 12}>
-          <Typography variant={isSmall ? "h5" : "h6"}>
+        <Grid item container xs={is650 ? 7 : 12}>
+          <Typography variant={is650 ? "h5" : "h6"}>
             Lorem ipsum dolor, sit amet consectetur{" "}
           </Typography>
         </Grid>
-        {isSmall ? (
+        {is650 ? (
           <Grid item container xs={5} alignItems={"center"}>
             <Grid item container xs={4} justifyContent={"center"}>
               <Box
@@ -104,7 +105,13 @@ function VideoInfoSection() {
                 </Button>
               </Box>
             </Grid>
-            <Grid item container xs={3} justifyContent={"center"}>
+            <Grid
+              item
+              container
+              xs={3}
+              pr={is350 ? 0 : 1}
+              justifyContent={"center"}
+            >
               <Tooltip placement={"top"} title="Share">
                 <Button variant="outlined">
                   <ShareIcon fontSize="small" />

@@ -20,13 +20,14 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import InsertCommentIcon from "@mui/icons-material/InsertComment";
 import ShareIcon from "@mui/icons-material/Share";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import useScreenWidth from "../kooks/useScreenwith";
 function HomeView() {
-  const isSmall = useMediaQuery("(min-width:700px)");
+  const { is700 } = useScreenWidth();
   return (
     <>
       <Header maxWidth={"lg"} />
       <Grid container>
-        <Grid item xs={isSmall ? 7 : 12}>
+        <Grid item xs={is700 ? 7 : 12}>
           <Container
             maxWidth={"md"}
             sx={{
@@ -41,7 +42,7 @@ function HomeView() {
             <VideoPaper />
           </Container>
         </Grid>
-        {isSmall && (
+        {is700 && (
           <Grid item xs={5} pr={1}>
             <Box
               sx={{
@@ -67,11 +68,11 @@ function HomeView() {
 export default HomeView;
 
 function MyIconButton({ children, value }) {
-  const isSmall = useMediaQuery("(min-width:375px)");
+  const { is375 } = useScreenWidth();
   return (
     <Box
       display={"flex"}
-      flexDirection={isSmall ? "row" : "column"}
+      flexDirection={is375 ? "row" : "column"}
       alignItems={"center"}
       gap={0.5}
     >
@@ -94,6 +95,7 @@ function MyIconButton({ children, value }) {
 }
 
 function VideoPaper() {
+  const { is750, is450 } = useScreenWidth();
   return (
     <Paper
       sx={{
@@ -134,7 +136,7 @@ function VideoPaper() {
         </IconButton>
       </Grid>
       <VideoPlayer video={"vids/katarinaPintakill.mp4"} />
-      <Grid mt={1} container pl={1}>
+      <Grid mt={1} container pl={1} pr={1}>
         <Grid
           item
           container
@@ -142,7 +144,7 @@ function VideoPaper() {
           alignItems={"center"}
           justifyContent={"space-between"}
         >
-          <Typography variant="body1" pl={1}>
+          <Typography flexGrow={"1"} variant="body1" pl={1}>
             156k views
           </Typography>
           <Box
@@ -150,8 +152,8 @@ function VideoPaper() {
               display: "flex",
               gap: 0.5,
               alignItems: "center",
-              pr: 1,
-              pl: 1,
+              flexGrow: "1",
+              justifyContent: "space-between",
             }}
           >
             <MyIconButton value={"155"}>
@@ -170,7 +172,12 @@ function VideoPaper() {
         </Grid>
         <Divider sx={{ width: "100%", mt: 1, mb: 1 }} />
         <Grid item container alignItems={"center"} xs={12}>
-          <Typography padding={1} pl={1} variant="h6">
+          <Typography
+            padding={1}
+            pl={1}
+            variant="h6"
+            fontSize={is450 ? "20px" : "15px"}
+          >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
           </Typography>
         </Grid>

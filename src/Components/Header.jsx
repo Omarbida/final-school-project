@@ -12,6 +12,7 @@ import {
   Grid,
   useMediaQuery,
   Drawer,
+  FormControl,
 } from "@mui/material";
 import PoligonAvatar from "./PoligonAvatar";
 import { Search } from "@mui/icons-material";
@@ -69,20 +70,16 @@ const Header = ({ maxWidth }) => {
             }}
           >
             <Grid flexGrow={1}>
-              <TextField
-                fullWidth
-                placeholder="Search"
-                variant="outlined"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton>
-                        <SearchIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
+              <FormControl fullWidth>
+                <InputBase
+                  placeholder="Search"
+                  sx={{
+                    borderRadius: "32px",
+                    border: "1px solid grey",
+                    p: "4px 16px",
+                  }}
+                />
+              </FormControl>
             </Grid>
             {collapse ? (
               <Grid minWidth={"370px"}>
@@ -97,6 +94,10 @@ const Header = ({ maxWidth }) => {
             ) : (
               <>
                 <Button
+                  sx={{
+                    p: 0,
+                    minWidth: 0,
+                  }}
                   onClick={() => {
                     toggleDrawer(true);
                   }}
@@ -104,7 +105,7 @@ const Header = ({ maxWidth }) => {
                   <MenuTwoToneIcon fontSize="large" />
                 </Button>
                 <Drawer
-                  anchor={"top"}
+                  anchor={"right"}
                   open={show}
                   onClose={() => toggleDrawer(false)}
                 >

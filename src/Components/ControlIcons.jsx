@@ -16,6 +16,7 @@ import {
   Fullscreen,
   VolumeOff,
 } from "@mui/icons-material";
+import useScreenWidth from "../kooks/useScreenwith";
 
 export const ButtonIconsStyle = {
   filter: "drop-shadow(2px 2px 5px rgba(0, 255, 255, 0.5))",
@@ -68,7 +69,7 @@ const ControlIcons = ({
   const containerRef = useRef(null);
   const [show, setShow] = useState(true);
   const [mouseMoving, setMouseMoving] = useState(false);
-
+  const { is350 } = useScreenWidth();
   const handleMouseMove = () => {
     setShow(true);
     setMouseMoving(true);
@@ -95,7 +96,7 @@ const ControlIcons = ({
           right: 0,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
+          justifyContent: "end",
           zIndex: 2,
           background: playing ? "transparent" : "rgba(0, 0, 0, 0.6)",
           transition: "all 0.3s ease",
@@ -103,59 +104,8 @@ const ControlIcons = ({
         }}
         onClick={playandpause}
         onMouseMove={handleMouseMove}
+        ref={containerRef}
       >
-        {/*topsextion*/}
-        <Grid
-          container
-          direction="row"
-          alignItems="center"
-          justifyContent="start"
-          sx={{ padding: 2 }}
-          ref={containerRef}
-          overflow={"hidden"}
-        >
-          <Grid item>
-            <Slide
-              timeout={100}
-              direction="right"
-              in={!playing}
-              mountOnEnter
-              container={containerRef.current}
-            >
-              <Typography sx={{ ...textShadow }} variant="h6" color={color}>
-                Katarina Pintakill Howlingabys
-              </Typography>
-            </Slide>
-          </Grid>
-        </Grid>
-        {/*midle section*/}
-        <Grid
-          container
-          direction="row"
-          alignItems="center"
-          justifyContent="space-around"
-        >
-          <Zoom
-            timeout={150}
-            in={!playing}
-            mountOnEnter
-            container={containerRef.current}
-          >
-            <IconButton
-              sx={{ ...ButtonIconsStyle }}
-              aria-label="play"
-              onClick={playandpause}
-            >
-              <PlayArrowSharp
-                fontSize="large"
-                sx={{
-                  color: color,
-                }}
-              />
-            </IconButton>
-          </Zoom>
-        </Grid>
-        {/* Bottom Section */}
         <Grid
           container
           direction="row"
@@ -168,11 +118,22 @@ const ControlIcons = ({
             paddingRight={2}
             xs={12}
             direction="row"
-            justifyContent={"flex-end"}
+            justifyContent={"space-between"}
             sx={{
               overflow: "hidden",
             }}
           >
+            <Slide
+              timeout={100}
+              direction="right"
+              in={!playing || show}
+              mountOnEnter
+              container={containerRef.current}
+            >
+              <IconButton sx={ButtonIconsStyle} onClick={playandpause}>
+                <PlayArrowSharp fontSize={is350 ? "large" : "medium"} />
+              </IconButton>
+            </Slide>
             <Slide
               timeout={100}
               direction="left"
@@ -184,14 +145,14 @@ const ControlIcons = ({
                 <IconButton sx={ButtonIconsStyle} onClick={handleMute}>
                   {!!mute ? (
                     <VolumeOff
-                      fontSize="medium"
+                      fontSize={is350 ? "medium" : "small"}
                       sx={{
                         color: color,
                       }}
                     />
                   ) : (
                     <VolumeUp
-                      fontSize="medium"
+                      fontSize={is350 ? "medium" : "small"}
                       sx={{
                         color: color,
                       }}
@@ -200,7 +161,7 @@ const ControlIcons = ({
                 </IconButton>
                 <IconButton sx={ButtonIconsStyle} aria-label="play">
                   <Fullscreen
-                    fontSize="medium"
+                    fontSize={is350 ? "medium" : "small"}
                     sx={{
                       color: color,
                     }}
@@ -212,8 +173,12 @@ const ControlIcons = ({
                     alignItems: "center",
                   }}
                 >
-                  {" "}
-                  <Typography variant="h6" sx={textShadow} color={color}>
+                  <Typography
+                    variant="h6"
+                    sx={textShadow}
+                    fontSize={is350 ? "20px" : "15px"}
+                    color={color}
+                  >
                     {rmainingTinme}
                   </Typography>
                 </Box>
