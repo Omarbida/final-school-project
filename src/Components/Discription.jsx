@@ -1,6 +1,8 @@
 import { Container, Typography } from "@mui/material";
+import useScreenWidth from "../kooks/useScreenwith";
 
 function Discription() {
+  const { is450 } = useScreenWidth();
   return (
     <Container
       sx={{
@@ -8,12 +10,12 @@ function Discription() {
       }}
       maxWidth={"md"}
     >
-      <Typography variant="h3">Shorts gaming</Typography>
-      <Typography variant="p">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur ea
-        repudiandae ratione placeat fugit, ex ad vero fugiat in ipsum ab minima
-        nam soluta aliquid dolor, quos cumque quis numquam. Possimus temporibus
-        eum quo accusantium.
+      <Typography variant={is450 ? "h3" : "h5"}>Welcom to PlaySpot</Typography>
+      <Typography variant="p" fontSize={is450 ? "16px" : "12px"}>
+        The go-to hub for gamers to share epic clutches and outplays! Join our
+        community, post your best clips, and see how you rank among fellow
+        gamers. Casual or pro, PlaySpot is your stage. Sign up and start
+        showcasing your skills today!
       </Typography>
     </Container>
   );

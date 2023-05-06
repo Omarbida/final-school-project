@@ -3,6 +3,7 @@ import { useMediaQuery } from "@mui/material";
 const useScreenWidth = () => {
   const is750 = useMediaQuery("(min-width:750px)");
   const is450 = useMediaQuery("(min-width:450px)");
+  const is425 = useMediaQuery("(min-width:425px)");
   const is375 = useMediaQuery("(min-width:375px)");
   const is350 = useMediaQuery("(min-width:350px)");
   const is700 = useMediaQuery("(min-width:700px)");
@@ -16,6 +17,7 @@ const useScreenWidth = () => {
     is650,
     is350,
     is320,
+    is425,
   };
 };
 export default useScreenWidth;

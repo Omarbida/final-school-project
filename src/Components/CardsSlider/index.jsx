@@ -21,36 +21,64 @@ const cardVideos = [
     thumnail: "bg10.jpg",
     likesCount: 451561,
     title: "video 1 title",
+    user: {
+      avatar: "bg1.jpg",
+      rank: 4,
+    },
   },
   {
     thumnail: "bg2.jpg",
     likesCount: 46845,
     title: "video 2 title",
+    user: {
+      avatar: "bg4.jpg",
+      rank: 3,
+    },
   },
   {
     thumnail: "bg3.jpg",
     likesCount: 10566,
     title: "video 3 title",
+    user: {
+      avatar: "bg5.jpg",
+      rank: 2,
+    },
   },
   {
     thumnail: "bg4.jpg",
     likesCount: 156643,
     title: "video 4 title",
+    user: {
+      avatar: "bg2.jpg",
+      rank: 5,
+    },
   },
   {
     thumnail: "bg5.jpg",
     likesCount: 14631,
     title: "video 5 title",
+    user: {
+      avatar: "bg7.jpg",
+      rank: 3,
+    },
   },
   {
     thumnail: "bg6.jpg",
     likesCount: 75416,
     title: "video 6 title",
+    user: {
+      avatar: "bg9.jpg",
+      rank: 2,
+    },
   },
   {
     thumnail: "bg13.png",
     likesCount: 951344,
     title: "video 7 title",
+    user: {
+      avatar: "bg4.jpg",
+      rank: 1,
+    },
   },
 ];
 
@@ -284,7 +312,11 @@ function Card({ item, index, arr }) {
             justifyContent={"center"}
             xs={3}
           >
-            <PoligonAvatar size={"45px"} />
+            <PoligonAvatar
+              size={"45px"}
+              rank={item.user.rank}
+              avatar={item.user.avatar}
+            />
           </Grid>
           <Grid item container xs={8} alignItems={"center"} paddingRight={1}>
             <Typography

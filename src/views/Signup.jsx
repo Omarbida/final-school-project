@@ -3,6 +3,7 @@ import Discription from "../Components/Discription";
 import { useNavigate } from "react-router-dom";
 import { ROUTS } from "../consts";
 import { useEffect, useState } from "react";
+import useScreenWidth from "../kooks/useScreenwith";
 
 function Signup() {
   const [name, setName] = useState("");
@@ -19,7 +20,7 @@ function Signup() {
     }
   }, [password, confPassword, setError]);
   const navigate = useNavigate();
-
+  const { is450 } = useScreenWidth();
   return (
     <Container
       sx={{
@@ -43,6 +44,7 @@ function Signup() {
           sx={{
             display: "flex",
             gap: 2,
+            flexWrap: is450 ? "nowrap" : "wrap",
           }}
         >
           <TextField

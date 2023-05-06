@@ -1,6 +1,6 @@
 import { Avatar, Box } from "@mui/material";
 
-const PoligonAvatar = ({ size, rank }) => {
+const PoligonAvatar = ({ size, rank, avatar }) => {
   return (
     <Box
       sx={{
@@ -34,7 +34,7 @@ const PoligonAvatar = ({ size, rank }) => {
             zIndex: "100",
           }}
           width={"100%"}
-          src={`ranks/rank${rank ? rank : "1"}badge.png`}
+          src={`ranks/rank${rank}badge.png`}
         />
       </Box>
       <Avatar
@@ -43,7 +43,7 @@ const PoligonAvatar = ({ size, rank }) => {
           width: "100%",
         }}
       >
-        <Box component={"img"} src="bg1.jpg" height={"100%"} />
+        {avatar && <Box component={"img"} src={avatar} height={"100%"} />}
       </Avatar>
     </Box>
   );

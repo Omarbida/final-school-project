@@ -35,6 +35,11 @@ const videos = [
     tags: ["#league of legends", "#Pintakill", "#kayle", "#ARAM"],
     ranks: 87,
     rankRate: 3.4,
+    user: {
+      avatar: "bg1.jpg",
+      rank: 4,
+      name: "Omar bida",
+    },
   },
   {
     video: "vids/kalistaPintakill.webm",
@@ -46,6 +51,11 @@ const videos = [
     tags: ["#league of legends", "#Pintakill", "#kalista", "#ARAM"],
     ranks: 75,
     rankRate: 2.7,
+    user: {
+      avatar: "bg3.jpg",
+      rank: 2,
+      name: "zodiac madafac",
+    },
   },
   {
     video: "vids/poppyOneshot.webm",
@@ -57,6 +67,11 @@ const videos = [
     tags: ["#league of legends", "#oneShot", "#poppy", "#funny"],
     ranks: 197,
     rankRate: 4.3,
+    user: {
+      avatar: "bg4.jpg",
+      rank: 3,
+      name: "Clutch Lord",
+    },
   },
   {
     video: "vids/poppyOutplayJ4.webm",
@@ -68,6 +83,11 @@ const videos = [
     tags: ["#league of legends", "#outplay", "#poppy"],
     ranks: 268,
     rankRate: 4.8,
+    user: {
+      avatar: "bg6.jpg",
+      rank: 1,
+      name: "Disrespect",
+    },
   },
 ];
 
@@ -100,6 +120,7 @@ function HomeView() {
                   tags={video.tags}
                   ranks={video.ranks}
                   rankRate={video.rankRate}
+                  user={video.user}
                 />
               );
             })}
@@ -167,6 +188,7 @@ function VideoPaper({
   name,
   tags,
   ranks,
+  user,
 }) {
   const { is750, is450, is350, is320 } = useScreenWidth();
   return (
@@ -190,14 +212,18 @@ function VideoPaper({
             gap: 1,
           }}
         >
-          <PoligonAvatar size={is350 ? "50px" : "40px"} />
+          <PoligonAvatar
+            size={is350 ? "50px" : "40px"}
+            avatar={user.avatar}
+            rank={user.rank}
+          />
 
           <Typography
             variant="h6"
             fontWeight={600}
             fontSize={is350 ? "20px" : "15px"}
           >
-            Omar Bida
+            {user.name}
           </Typography>
           <Button variant="outlined" sx={{ fontSize: "10px" }}>
             Follow
