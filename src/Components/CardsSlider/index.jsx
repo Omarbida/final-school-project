@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import {
   Box,
@@ -15,6 +14,46 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import PoligonAvatar from "../PoligonAvatar";
 import { ROUTS } from "../../consts";
 import { useNavigate } from "react-router-dom";
+import EndShadow from "./EndShadow";
+
+const cardVideos = [
+  {
+    thumnail: "bg10.jpg",
+    likesCount: 451561,
+    title: "video 1 title",
+  },
+  {
+    thumnail: "bg2.jpg",
+    likesCount: 46845,
+    title: "video 2 title",
+  },
+  {
+    thumnail: "bg3.jpg",
+    likesCount: 10566,
+    title: "video 3 title",
+  },
+  {
+    thumnail: "bg4.jpg",
+    likesCount: 156643,
+    title: "video 4 title",
+  },
+  {
+    thumnail: "bg5.jpg",
+    likesCount: 14631,
+    title: "video 5 title",
+  },
+  {
+    thumnail: "bg6.jpg",
+    likesCount: 75416,
+    title: "video 6 title",
+  },
+  {
+    thumnail: "bg13.png",
+    likesCount: 951344,
+    title: "video 7 title",
+  },
+];
+
 const Card_Slider = () => {
   let [scrollcard, setscrollcard] = useState(0);
   const containerRef = useRef();
@@ -60,29 +99,9 @@ const Card_Slider = () => {
         elevation={1}
       >
         {/*shadowleft*/}
-        <Box
-          sx={{
-            position: "absolute",
-            width: "10px",
-            top: 0,
-            bottom: 0,
-            left: 0,
-            zIndex: 99,
-            background: "linear-gradient(270deg,transparent , #121212)",
-          }}
-        ></Box>
+        <EndShadow angle={"270deg"} side={"left"} />
         {/*shadow right*/}
-        <Box
-          sx={{
-            position: "absolute",
-            width: "10px",
-            top: 0,
-            bottom: 0,
-            right: 0,
-            zIndex: 99,
-            background: "linear-gradient(90deg,transparent , #121212)",
-          }}
-        ></Box>
+        <EndShadow angle={"90deg"} side={"right"} />
         {/*button left */}
         <IconButton
           sx={{
@@ -143,7 +162,7 @@ const Card_Slider = () => {
           style={{ scrollLeft: scrollcard }}
           ref={containerRef}
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item, index, arr) => {
+          {cardVideos.map((item, index, arr) => {
             return (
               <Card
                 key={index + item}
@@ -165,7 +184,6 @@ function Card({ item, index, arr }) {
   const [show, setShow] = useState(false);
   return (
     <Box
-      key={index + item}
       sx={{
         display: "inline-block",
         cursor: "pointer",
@@ -215,7 +233,7 @@ function Card({ item, index, arr }) {
             position: "relative",
           }}
           style={{
-            backgroundImage: `url(bg${index + 1}.jpg)`,
+            backgroundImage: `url(${item.thumnail})`,
           }}
         >
           <Box
@@ -241,7 +259,11 @@ function Card({ item, index, arr }) {
                 paddingRight={1}
               >
                 <Typography variant="body1" color={"primary"}>
-                  {show ? "155 022" : "155k"}
+                  {show
+                    ? item.likesCount
+                    : item.likesCount > 10000
+                    ? `${Math.floor(item.likesCount / 1000)}k`
+                    : item.likesCount}
                 </Typography>
                 <FavoriteIcon color="primary" />
               </Grid>
@@ -275,7 +297,7 @@ function Card({ item, index, arr }) {
               }}
               variant={"body1"}
             >
-              Video name the name is long so long
+              {item.title}
             </Typography>
           </Grid>
         </Grid>
