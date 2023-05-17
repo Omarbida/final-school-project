@@ -11,9 +11,32 @@ import Header from "../Components/Header";
 import VideoInfoSection from "../Components/sections/VideoInfoSection";
 import Comment from "../Components/Comment";
 import CreateComment from "../Components/CreateComment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card_Slider from "../Components/CardsSlider";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 function VideoView() {
+  const { id } = useParams();
+  const [userInfo, setUserInfo] = useState();
+  const [video, setVideo] = useState();
+  useEffect(() => {
+    const basURL = import.meta.env.VITE_APP_HOST;
+    const URL = basURL + `/video/${id}`;
+
+    console.log("fetched");
+    axios({
+      method: "get",
+      url: URL,
+    })
+      .then((res) => {
+        console.log(res.data?.data);
+        setUserInfo(res.data?.data?.userInfo);
+        setVideo(res.data?.data?.video);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, [id]);
   return (
     <>
       <Header />
@@ -26,9 +49,9 @@ function VideoView() {
           gap: 3,
         }}
       >
-        <VideoSection />
+        <VideoSection video={video} userInfo={userInfo} />
 
-        <VideoInfoSection />
+        <VideoInfoSection video={video} userInfo={userInfo} />
         <Container
           maxWidth={"md"}
           sx={{

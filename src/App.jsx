@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./App.css";
 
@@ -16,6 +16,11 @@ import HomeView from "./views/HomeView";
 import { Route, Routes } from "react-router-dom";
 import { ROUTS } from "./consts";
 import ProfilView from "./views/profileView";
+import AuthGuard from "./Gaurds/authGuard";
+import { useDispatch } from "react-redux";
+import { initAuth } from "./redux/slices/authSlice";
+import PendingAccGuard from "./Gaurds/pendingAccGuard";
+
 const theme = createTheme({
   palette: {
     mode: "dark",
@@ -53,15 +58,54 @@ const theme = createTheme({
   },
 });
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(initAuth());
+  }, []);
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Routes>
-        <Route path={ROUTS.LOGIN} element={<Login />} />
-        <Route path={ROUTS.SIGNUP} element={<Signup />} />
-        <Route path={ROUTS.VIDEO_VIEW} element={<VideoView />} />
-        <Route path={ROUTS.HOME} element={<HomeView />} />
-        <Route path={ROUTS.PROFILE_VIEW} element={<ProfilView />} />
+        <Route
+          path={ROUTS.LOGIN}
+          element={
+            <AuthGuard>
+              <Login />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path={ROUTS.SIGNUP}
+          element={
+            <AuthGuard>
+              <Signup />
+            </AuthGuard>
+          }
+        />
+        <Route
+          path={ROUTS.VIDEO_VIEW + "/:id"}
+          element={
+            <PendingAccGuard>
+              <VideoView />
+            </PendingAccGuard>
+          }
+        />
+        <Route
+          path={ROUTS.HOME}
+          element={
+            <PendingAccGuard>
+              <HomeView />
+            </PendingAccGuard>
+          }
+        />
+        <Route
+          path={ROUTS.PROFILE_VIEW + "/:id"}
+          element={
+            <PendingAccGuard>
+              <ProfilView />
+            </PendingAccGuard>
+          }
+        />
       </Routes>
     </ThemeProvider>
   );

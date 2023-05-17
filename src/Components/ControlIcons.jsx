@@ -66,6 +66,7 @@ const ControlIcons = ({
   mute,
   played,
   rmainingTinme,
+  toggleFullScreen,
 }) => {
   const containerRef = useRef(null);
   const [show, setShow] = useState(true);
@@ -98,7 +99,7 @@ const ControlIcons = ({
           display: "flex",
           flexDirection: "column",
           justifyContent: "end",
-          zIndex: 2,
+          zIndex: 1000,
           background: playing ? "transparent" : "rgba(0, 0, 0, 0.6)",
           transition: "all 0.3s ease",
           userSelect: "none",
@@ -164,7 +165,11 @@ const ControlIcons = ({
                     />
                   )}
                 </IconButton>
-                <IconButton sx={ButtonIconsStyle} aria-label="play">
+                <IconButton
+                  sx={ButtonIconsStyle}
+                  aria-label="play"
+                  onClick={toggleFullScreen}
+                >
                   <Fullscreen
                     fontSize={is350 ? "medium" : "small"}
                     sx={{

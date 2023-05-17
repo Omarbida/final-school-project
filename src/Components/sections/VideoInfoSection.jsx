@@ -15,7 +15,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import LinkIcon from "@mui/icons-material/Link";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import useScreenWidth from "../../kooks/useScreenwith";
-function VideoInfoSection() {
+function VideoInfoSection({ video, userInfo }) {
   const { is650, is350 } = useScreenWidth();
   return (
     <Container
@@ -26,9 +26,7 @@ function VideoInfoSection() {
     >
       <Grid container>
         <Grid item container xs={is650 ? 7 : 12}>
-          <Typography variant={is650 ? "h5" : "h6"}>
-            Lorem ipsum dolor, sit amet consectetur{" "}
-          </Typography>
+          <Typography variant={is650 ? "h5" : "h6"}>{video?.title}</Typography>
         </Grid>
         {is650 ? (
           <Grid item container xs={5} alignItems={"center"}>
@@ -42,7 +40,7 @@ function VideoInfoSection() {
                 p={0.6}
                 pl={1}
               >
-                <Typography variant="body1">15.5K</Typography>
+                <Typography variant="body1">{video?.likesCount}</Typography>
                 <Divider orientation="vertical" flexItem />
                 <Button
                   sx={{
@@ -137,18 +135,20 @@ function VideoInfoSection() {
             gap: 1,
           }}
         >
-          <Chip variant="outlined" label={"league of legends"} />
-          <Chip variant="outlined" label={"Pintakill"} />
-          <Chip variant="outlined" label={"Katarina"} />
+          {video?.tags.map((tag, i) => {
+            return <Chip key={tag + i} variant="outlined" label={tag} />;
+          })}
         </Grid>
 
         <Grid item container xs={12} alignItems={"center"} gap={3}>
-          <PoligonAvatar size={"60px"} rank={2} />
+          <PoligonAvatar size={"60px"} avatar={userInfo?.avatarImg} />
           <Box>
             <Typography fontWeight={"800"} variant="h6">
-              Omar bida
+              {userInfo?.name} {userInfo?.lastName}
             </Typography>
-            <Typography>154,6k</Typography>
+            <Typography>
+              {userInfo?.followsCount ? userInfo?.followsCount : "0"}
+            </Typography>
           </Box>
           <Button variant="outlined">Follow</Button>
         </Grid>

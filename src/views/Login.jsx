@@ -1,14 +1,25 @@
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import Discription from "../Components/Discription";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { ROUTS } from "../consts";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { authLogin } from "../redux/slices/authSlice";
+import { useSnackbar } from "notistack";
 function Login() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
+  const handleSubmite = () => {
+    dispatch(authLogin({ email, password, enqueueSnackbar }));
+  };
+  const { isAuthLoading, isAuth, isSet } = useSelector((state) => state.auth);
+
+  if (isAuth && !isSet) {
+    return <Navigate to={ROUTS.SIGNUP} />;
+  }
 
   return (
     <Container
@@ -18,6 +29,7 @@ function Login() {
       maxWidth="sm"
     >
       <Discription />
+
       <Box
         sx={{
           display: "flex",
@@ -27,6 +39,7 @@ function Login() {
         component={"form"}
         onSubmit={(e) => {
           e.preventDefault();
+          handleSubmite();
         }}
       >
         <TextField
@@ -53,14 +66,14 @@ function Login() {
             borderRadius: "5px",
           }}
           variant="contained"
-          onClick={(e) => navigate(ROUTS.HOME)}
+          type="submit"
         >
-          Login
+          {isAuthLoading ? <CircularProgress /> : "Login"}
         </Button>
       </Box>
       <Typography mt={2} textAlign={"center"} fontSize={13}>
         Don't have an account ?{" "}
-        <Button onClick={() => navigate(ROUTS.SIGNUP)} variant="text">
+        <Button variant="text" onClick={() => navigate(ROUTS.SIGNUP)}>
           Signup
         </Button>
       </Typography>

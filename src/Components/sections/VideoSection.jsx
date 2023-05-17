@@ -5,7 +5,7 @@ import SkipNextIcon from "@mui/icons-material/SkipNext";
 import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import { ButtonIconsStyle } from "../ControlIcons";
 
-function VideoSection() {
+function VideoSection({ video, userInfo }) {
   return (
     <>
       <Container
@@ -23,7 +23,7 @@ function VideoSection() {
             p: "0!important",
           }}
         >
-          <VideoPlayer video={"vids/kalistaPintakill.webm"} />
+          <VideoPlayer video={video?.videoURL} />
         </Container>
       </Container>
     </>

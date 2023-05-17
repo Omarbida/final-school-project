@@ -10,148 +10,97 @@ import {
   Box,
   Chip,
   Divider,
-  TextField,
-  useMediaQuery,
-  Select,
-  MenuItem,
+  InputBase,
 } from "@mui/material";
 import VideoPlayer from "../Components/VideoPlayer";
-import PoligonAvatar from "../Components/PoligonAvatar";
-import MoreVertTwoToneIcon from "@mui/icons-material/MoreVertTwoTone";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import InsertCommentIcon from "@mui/icons-material/InsertComment";
 import ShareIcon from "@mui/icons-material/Share";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import useScreenWidth from "../kooks/useScreenwith";
 
-const videos = [
-  {
-    video: "vids/kaylePintakill.webm",
-    views: "145k",
-    likes: 12,
-    comments: 32,
-    shares: 5,
-    name: "Kayle Pintakill ARAM",
-    tags: ["#league of legends", "#Pintakill", "#kayle", "#ARAM"],
-    ranks: 87,
-    rankRate: 3.4,
-    user: {
-      avatar: "bg1.jpg",
-      rank: 4,
-      name: "Omar bida",
-    },
-  },
-  {
-    video: "vids/kalistaPintakill.webm",
-    views: "75k",
-    likes: 26,
-    comments: 10,
-    shares: 7,
-    name: "Kalista Pintakill ARAM",
-    tags: ["#league of legends", "#Pintakill", "#kalista", "#ARAM"],
-    ranks: 75,
-    rankRate: 2.7,
-    user: {
-      avatar: "bg3.jpg",
-      rank: 2,
-      name: "zodiac madafac",
-    },
-  },
-  {
-    video: "vids/poppyOneshot.webm",
-    views: "513k",
-    likes: 325,
-    comments: 211,
-    shares: 112,
-    name: "assassin Poppy",
-    tags: ["#league of legends", "#oneShot", "#poppy", "#funny"],
-    ranks: 197,
-    rankRate: 4.3,
-    user: {
-      avatar: "bg4.jpg",
-      rank: 3,
-      name: "Clutch Lord",
-    },
-  },
-  {
-    video: "vids/poppyOutplayJ4.webm",
-    views: "368k",
-    likes: 147,
-    comments: 97,
-    shares: 67,
-    name: "How to make J4 uninstall",
-    tags: ["#league of legends", "#outplay", "#poppy"],
-    ranks: 268,
-    rankRate: 4.8,
-    user: {
-      avatar: "bg6.jpg",
-      rank: 1,
-      name: "Disrespect",
-    },
-  },
-];
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useSnackbar } from "notistack";
+import axios from "axios";
+import useLike from "../kooks/useLike";
+import useComment from "../kooks/useComment";
+import Comment from "../Components/Comment";
+import CreateComment from "../Components/CreateComment";
+import VideoHeader from "../Components/videoPaper/videoHeader";
+import UploadVideoForm from "../Components/videoPaper/UploadVideoForm";
 
 function HomeView() {
   const { is750 } = useScreenWidth();
+  const [videos, setVideos] = useState([]);
+  useEffect(() => {
+    const basURL = import.meta.env.VITE_APP_HOST;
+    const URL = basURL + "/video";
+    axios({
+      method: "get",
+      url: URL,
+    })
+      .then((res) => {
+        setVideos(res?.data?.data?.videos);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
   return (
     <>
-      <Header maxWidth={"lg"} />
-      <Grid container>
-        <Grid item xs={is750 ? 7 : 12}>
-          <Container
-            maxWidth={"md"}
-            sx={{
-              pt: 2,
-              display: "flex",
-              flexDirection: "column",
-              gap: 3,
-            }}
-          >
-            {videos?.map((video, i) => {
-              return (
-                <VideoPaper
-                  key={video.name + video.likes + video.comments + i}
-                  video={video.video}
-                  views={video.views}
-                  likes={video.likes}
-                  comments={video.comments}
-                  shares={video.shares}
-                  name={video.name}
-                  tags={video.tags}
-                  ranks={video.ranks}
-                  rankRate={video.rankRate}
-                  user={video.user}
-                />
-              );
-            })}
-          </Container>
-        </Grid>
-        {is750 && (
-          <Grid item xs={5} pr={1}>
-            <Box
+      <Header maxWidth={"xl"} />
+      <Container
+        sx={{
+          p: "0!important",
+        }}
+        maxWidth={"xl"}
+      >
+        <Grid container>
+          <Grid item xs={is750 ? 7 : 12}>
+            <Container
+              maxWidth={"md"}
               sx={{
-                position: "sticky",
-                top: "80px",
+                pt: 2,
                 display: "flex",
                 flexDirection: "column",
-                gap: 1,
+                gap: 3,
               }}
             >
-              <Card_Slider />
-              <Grid item xs={12} container>
-                <Paper sx={{ width: "100%", padding: 1 }}></Paper>
-              </Grid>
-            </Box>
+              <UploadVideoForm />
+              {videos?.map((video, i) => {
+                return <VideoPaper key={video.id} video={video} />;
+              })}
+            </Container>
           </Grid>
-        )}
-      </Grid>
+          {is750 && (
+            <Grid item xs={5} pr={1}>
+              <Box
+                sx={{
+                  position: "sticky",
+                  top: "80px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 1,
+                }}
+              >
+                <Card_Slider />
+                <Grid item xs={12} container>
+                  <Paper sx={{ width: "100%", padding: 1 }}></Paper>
+                </Grid>
+              </Box>
+            </Grid>
+          )}
+        </Grid>
+      </Container>
     </>
   );
 }
 
 export default HomeView;
 
-function MyIconButton({ children, value }) {
+function MyIconButton({ children, value, onClick }) {
   const { is375 } = useScreenWidth();
   return (
     <Box
@@ -161,6 +110,7 @@ function MyIconButton({ children, value }) {
       gap={0.5}
     >
       <IconButton
+        onClick={onClick}
         sx={{
           border: "1px solid grey",
           ":hover": {
@@ -178,19 +128,67 @@ function MyIconButton({ children, value }) {
   );
 }
 
-function VideoPaper({
-  video,
-  views,
-  likes,
-  comments,
-  shares,
-  rankRate,
-  name,
-  tags,
-  ranks,
-  user,
-}) {
-  const { is750, is450, is350, is320 } = useScreenWidth();
+function VideoPaper({ video }) {
+  const { is450 } = useScreenWidth();
+  const [userInfo, setUserInfo] = useState();
+  const { isAuth, sessionToken } = useSelector((state) => state.auth);
+  const { enqueueSnackbar } = useSnackbar();
+  const [showComments, setShowComments] = useState(false);
+  const { comments, isLoading, getComments, postComment, commentsCount } =
+    useComment({
+      video,
+      sessionToken,
+    });
+  const { isLiked, like, unLike, likes } = useLike({
+    video,
+    sessionToken,
+  });
+  useEffect(() => {
+    const basURL = import.meta.env.VITE_APP_HOST;
+    const URL = basURL + "/auth/user/" + video.user;
+    axios({
+      method: "get",
+      url: URL,
+    })
+      .then((res) => {
+        setUserInfo(res?.data?.data?.user);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
+  const handleLike = () => {
+    if (!isAuth) {
+      enqueueSnackbar("Login to like videos", {
+        variant: "error",
+        preventDuplicate: true,
+      });
+    }
+    if (isLiked) {
+      unLike();
+    } else {
+      like();
+    }
+  };
+  const handleShowComments = () => {
+    if (!showComments) {
+      getComments();
+      setShowComments(true);
+    } else {
+      setShowComments(false);
+    }
+  };
+  const handlePostComment = (comment) => {
+    if (!comment) {
+      enqueueSnackbar("you can't post an empty comment", {
+        variant: "error",
+        preventDuplicate: true,
+      });
+    } else {
+      postComment(comment);
+    }
+  };
   return (
     <Paper
       sx={{
@@ -199,45 +197,8 @@ function VideoPaper({
         borderRadius: "8px",
       }}
     >
-      <Grid
-        container
-        p={is350 ? 1 : 0.4}
-        alignItems={"center"}
-        justifyContent={"space-between"}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-          }}
-        >
-          <PoligonAvatar
-            size={is350 ? "50px" : "40px"}
-            avatar={user.avatar}
-            rank={user.rank}
-          />
-
-          <Typography
-            variant="h6"
-            fontWeight={600}
-            fontSize={is350 ? "20px" : "15px"}
-          >
-            {user.name}
-          </Typography>
-          <Button variant="outlined" sx={{ fontSize: "10px" }}>
-            Follow
-          </Button>
-        </Box>
-        <IconButton
-          sx={{
-            justifySelf: "flex-end",
-          }}
-        >
-          <MoreVertTwoToneIcon fontSize={is350 ? "meduim" : "small"} />
-        </IconButton>
-      </Grid>
-      <VideoPlayer video={video} />
+      <VideoHeader userInfo={userInfo} />
+      <VideoPlayer video={video.videoURL} />
       <Grid mt={1} container pl={1} pr={1}>
         <Grid
           item
@@ -247,7 +208,7 @@ function VideoPaper({
           justifyContent={"space-between"}
         >
           <Typography flexGrow={"1"} variant="body1" pl={1}>
-            {views ? views : "0"} views
+            {video.views ? video.views : "0"} views
           </Typography>
           <Box
             sx={{
@@ -258,13 +219,20 @@ function VideoPaper({
               justifyContent: "space-between",
             }}
           >
-            <MyIconButton value={likes ? likes : "0"}>
-              <FavoriteBorderIcon fontSize="small" />
+            <MyIconButton value={likes || "0"} onClick={handleLike}>
+              {!isLiked ? (
+                <FavoriteBorderIcon fontSize="small" />
+              ) : (
+                <FavoriteIcon fontSize="small" color="primary" />
+              )}
             </MyIconButton>
-            <MyIconButton value={comments ? comments : "0"}>
+            <MyIconButton
+              value={commentsCount || "0"}
+              onClick={handleShowComments}
+            >
               <InsertCommentIcon fontSize="small" />
             </MyIconButton>
-            <MyIconButton value={shares ? shares : "0"}>
+            <MyIconButton value={video.shares ? video.shares : "0"}>
               <ShareIcon fontSize="small" />
             </MyIconButton>
             <MyIconButton value={"Copy link"}>
@@ -281,62 +249,45 @@ function VideoPaper({
             variant="h6"
             fontSize={is450 ? "20px" : "15px"}
           >
-            {name ? name : "error loading name"}
+            {video?.title ? video?.title : "error loading name"}
           </Typography>
         </Grid>
         <Grid item container xs={12} gap={1}>
-          {tags?.map((tag, i) => {
+          {video?.tags?.map((tag, i) => {
             return <Chip key={i + tag} variant="outlined" label={tag} />;
           })}
         </Grid>
-        <Divider sx={{ width: "100%", mt: 2, mb: 1 }} />
-        <Grid item container xs={12}>
-          <Grid item container xs={12} md={4} alignItems={"center"}>
-            <Box
-              component={"img"}
-              src={`ranks/rank${2}badge.png`}
-              width={is320 ? "50px" : "40px"}
-            />
-            <Typography flexGrow={"1"} variant="body1" pl={1}>
-              {rankRate ? rankRate : "1"} / {ranks ? ranks : "0"}
-            </Typography>
-          </Grid>
-          <Grid item container xs={12} md={8}>
-            <Grid
-              mt={1}
-              item
-              container
-              xs={12}
-              justifyContent={"space-between"}
-            >
-              <RankIconButton rank={5} />
-              <RankIconButton rank={4} />
-              <RankIconButton rank={3} />
-              <RankIconButton rank={2} />
-              <RankIconButton rank={1} />
-            </Grid>
-          </Grid>
-        </Grid>
+        <Divider sx={{ width: "100%", mt: 2, mb: 2 }} />
+
+        <Container
+          maxWidth={"md"}
+          sx={{
+            p: "0!important",
+            display: "flex",
+            flexDirection: "column",
+            gap: 3,
+          }}
+        >
+          <CreateComment handlePostComment={handlePostComment} />
+          {showComments &&
+            !isLoading &&
+            comments.map((comment, i) => {
+              return <Comment key={comment.id} comment={comment} />;
+            })}
+
+          <Button
+            variant="text"
+            onClick={() => {
+              handleShowComments();
+            }}
+          >
+            {showComments ? "show less" : "show more"}
+          </Button>
+          {showComments && comments.length == 0 && (
+            <Typography>No comments </Typography>
+          )}
+        </Container>
       </Grid>
     </Paper>
-  );
-}
-function RankIconButton({ rank }) {
-  const { is320 } = useScreenWidth();
-  return (
-    <Box
-      sx={{
-        cursor: "pointer",
-        filter: "grayscale(100%)",
-        transition: "all 0.2s ease",
-        ":hover": {
-          filter: "grayscale(0)",
-          scale: "1.1",
-        },
-      }}
-      component={"img"}
-      src={`ranks/rank${rank}badge.png`}
-      width={is320 ? "50px" : "40px"}
-    />
   );
 }

@@ -11,6 +11,7 @@ function VideoPlayer({ video }) {
   });
   const { playing, mute, played } = playerstate;
   const playerRef = useRef(null);
+  const BoxRef = useRef(null);
   const handlePlayAndPause = () => {
     setPlayerState({
       ...playerstate,
@@ -49,13 +50,25 @@ function VideoPlayer({ video }) {
       return `${mm}:${ss}`;
     }
   };
+  const [isFullScreen, setIsFullScreen] = useState(false);
   const rmainingTinme = format(videoDuration - currentPlayerTime);
-
+  const toggleFullScreen = (e) => {
+    e.stopPropagation();
+    if (isFullScreen) {
+      document.exitFullscreen?.();
+      setIsFullScreen(false);
+    } else {
+      BoxRef?.current?.requestFullscreen?.();
+      setIsFullScreen(true);
+    }
+  };
   return (
     <Box
       sx={{
         position: "relative",
+        zIndex: 1000,
       }}
+      ref={BoxRef}
     >
       <ReactPlayer
         width={"100%"}
@@ -71,7 +84,7 @@ function VideoPlayer({ video }) {
           })
         }
         onProgress={handlePlayerProgress}
-      />
+      ></ReactPlayer>
       <ControlIcons
         playandpause={handlePlayAndPause}
         playing={playing}
@@ -79,6 +92,7 @@ function VideoPlayer({ video }) {
         mute={mute}
         played={played}
         rmainingTinme={rmainingTinme}
+        toggleFullScreen={toggleFullScreen}
       />
     </Box>
   );

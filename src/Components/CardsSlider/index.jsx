@@ -232,7 +232,6 @@ function Card({ item, index, arr }) {
       }}
       onMouseEnter={() => setShow(true)}
       onMouseLeave={() => setShow(false)}
-      onClick={() => navigate(ROUTS.VIDEO_VIEW)}
       component={Paper}
       elevation={24}
     >
@@ -312,11 +311,7 @@ function Card({ item, index, arr }) {
             justifyContent={"center"}
             xs={3}
           >
-            <PoligonAvatar
-              size={"45px"}
-              rank={item.user.rank}
-              avatar={item.user.avatar}
-            />
+            <PoligonAvatar size={"45px"} avatar={item.user.avatar} />
           </Grid>
           <Grid item container xs={8} alignItems={"center"} paddingRight={1}>
             <Typography

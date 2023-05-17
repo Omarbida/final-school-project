@@ -13,29 +13,55 @@ import Header from "../Components/Header";
 import ProfileJumbotron from "../Components/ProfileComponents/ProfileJumbotron";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useScreenWidth from "../kooks/useScreenwith";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 function ProfilView() {
+  const { is320 } = useScreenWidth();
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const [userProfile, setUserProfile] = useState();
+  useEffect(() => {
+    const basURL = import.meta.env.VITE_APP_HOST;
+    const URL = basURL + `/auth/user/${id}`;
+    axios({
+      method: "get",
+      url: URL,
+    })
+      .then((res) => {
+        setUserProfile(res?.data?.data?.user);
+      })
+      .catch((e) => console.log(e));
+  }, [id, setUserProfile]);
   return (
     <>
       <Header />
 
-      <ProfileJumbotron />
+      <ProfileJumbotron user={userProfile} />
       <Container maxWidth={"md"}>
         <Grid container spacing={3} mt={0}>
           <Grid item container xs={12}>
             <Grid
               item
               container
-              xs={6}
+              xs={is320 ? 8 : 12}
               alignItems={"center"}
-              justifyContent={"center"}
+              order={is320 ? 0 : 2}
             >
-              <Typography variant="h5">
-                5 Collections with 125 Clips in Total:
-              </Typography>
+              <Typography variant="h7"></Typography>
             </Grid>
-            <Grid item container xs={6} justifyContent={"end"}>
+
+            <Grid
+              item
+              container
+              xs={is320 ? 4 : 12}
+              justifyContent={"end"}
+              mb={1}
+            >
               <TextField
+                fullWidth
                 placeholder="Search for colection or clip"
                 variant="standard"
                 InputProps={{
@@ -50,13 +76,7 @@ function ProfilView() {
               />
             </Grid>
           </Grid>
-          <Grid item container xs={12} spacing={3}>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-          </Grid>
+          <Grid item container xs={12} spacing={3}></Grid>
         </Grid>
       </Container>
     </>
@@ -176,8 +196,8 @@ function Card() {
       item
       container
       xs={6}
-      sm={6}
-      md={4}
+      sm={4}
+      md={3}
       alignItems={"center"}
       justifyContent={"center"}
     >
@@ -186,8 +206,8 @@ function Card() {
         onMouseLeave={() => setHovered(false)}
         container
         width={"100%"}
-        maxWidth={"200px"}
-        height={"300px"}
+        maxWidth={"140px"}
+        height={"200px"}
         component={Paper}
         elevation={3}
         borderRadius={"10px"}
@@ -211,24 +231,3 @@ function Card() {
     </Grid>
   );
 }
-
-// function OverLay({ show }) {
-//   return (
-//     <Box
-//       width={"50%"}
-//       height={"50%"}
-//       position={"absolute"}
-//       bottom={0}
-//       right={0}
-//       display={"flex"}
-//       alignItems={"center"}
-//       justifyContent={"center"}
-//       bgcolor={"rgba(0, 0, 0, 0.7)"}
-//       sx={{
-//         backdropFilter: "blur(3px)",
-//       }}
-//     >
-//       <PlaylistAddIcon fontSize="large" color={show ? "primary" : "white"} />
-//     </Box>
-//   );
-// }

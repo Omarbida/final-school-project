@@ -4,4 +4,5 @@ export const ROUTS = {
   HOME: "/",
   VIDEO_VIEW: "/video",
   PROFILE_VIEW: "/profile",
+  ACCOUNT_FINAL_STEPS: "/setupaccount",
 };
